@@ -1,0 +1,126 @@
+@import "../../assets/variables";
+
+.gallery {
+    padding: 1em;
+
+    img {
+        object-fit: cover;
+    }
+
+    .featured {
+        max-height: 500px;
+
+        @media screen and (max-width: 768px) {
+            max-height: 350px;
+        }
+    }
+
+    .thumb-list {
+        padding: 1em 0;
+        overflow-x: scroll;
+        display: flex;
+        align-items: left;
+        flex-wrap: nowrap;
+
+        // &::-webkit-scrollbar {
+        //     display: none;
+        // }
+
+        img {
+            min-width: 150px;
+            max-width: 150px;
+            height: 150px;
+            margin-right: 1px;
+            display: flex;
+
+            &.active {
+                opacity: .3;
+            }
+        }
+    }
+}
+
+.details {
+    padding: 1em;
+
+    @media screen and (max-width: 768px) {
+        padding: 0;
+    }
+
+    .detail-container {
+        background: white;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+.title-block {
+    h1 {
+        font-size: 1.6em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+        color: $mediumgray;
+        font-weight: lighter;
+    }
+}
+
+.price-block {
+    .finance-container {
+        color: $mediumgray;
+    }
+
+    .price-container {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 1.6em;
+        color: $color_1;
+    }
+}
+
+.specs-block {
+    dd {
+        color: $mediumgray;
+    }
+}
+
+.features-block {
+    .card {
+        border: none;
+
+        .card-title {
+            text-align: center;
+            color: $mediumgray;
+        }
+    }
+}
+
+.block-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+    margin-top: .5em;
+
+    .active {
+        color: $color_1;
+        font-weight: bold;
+    }
+}
+
+//Form Validation
+form {
+  .ng-invalid.ng-touched { //.is-invalid
+    border: 1px solid red
+  }
+  .ng-valid.ng-touched {
+    border: 1px solid green
+  }
+  .invalid-feedback {
+    color: red
+  }
+}

@@ -1,0 +1,57 @@
+@import "../../../assets/variables";
+
+.footer {
+    // margin-top: 1em;
+
+    .redesSociales {
+        background-color: $background_color_1;
+
+        i {
+            font-size: 2em;
+            color: $color_5;
+            margin: .5em;
+        }
+
+        h3 {
+            color: $color_5;
+        }
+    }
+
+    .links {
+        background-color: $background_color_4;
+        height: auto;
+        padding-top: 2em;
+
+        h3 {
+            color: $color_2;
+        }
+
+        ul {
+            -webkit-padding-start: 0;
+
+            li {
+                list-style-type: none;
+                list-style-position: outside;
+                color: $color_3;
+
+                a {
+                    color: $color_3;
+
+                    &:hover {
+                        color: $color_5;
+                    }
+                }
+            }
+        }
+    }
+
+    .branding {
+        background-color: $background_color_5;
+        padding-top: 2em; 
+        padding-bottom: 2em; 
+
+        a {
+            color: $color_6;
+        }
+    }
+}

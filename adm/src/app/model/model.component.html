@@ -1,0 +1,31 @@
+<h4 class="section-title">
+  Modelos</h4>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/models']">Modelos</a>
+  </li>
+  <li class="breadcrumb-item active">Nuevo Modelo</li>
+</ol>
+<div class="container-fluid">
+  <form class="w-100 pt-3" [formGroup]="formObject" (ngSubmit)="logForm(formObject.value)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="brand">Marca</label>
+        <select class="form-control" id="brand" formControlName="brand">
+          <option value="" disabled selected>Seleccione una marca</option>
+          <option value="{{brand._id}}" *ngFor="let brand of brands">{{brand.name}}</option>
+        </select>
+        </div>
+      <div class="form-group col-md-6">
+        <label for="name">Modelo</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <div *ngIf="!formObject.controls['name'].valid && formObject.controls['name'].touched" class="invalid-feedback">
+          Debe ingresar una modelo
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary mb-4" type="submit" block [disabled]="!formObject.valid">
+      <i class="fa fa-paper-plane-o" aria-hidden="true"></i> GUARDAR
+    </button>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+[
+  {
+    "id":1,
+    "fecha":1506343884780,
+    "categoria":1,
+    "destacado":false,
+    "titulo":"Festival 4 Estaciones",
+    "extracto":"4 Estaciones es un festival gratuito, que se realiza en la plaza principal de Jesús María, desagregado a lo largo del año. Son cuatro fechas que se desarrollan en la segunda mitad del verano, hacia fines de febrero o principios de marzo, en otoño, por lo general en mayo, invierno, en agosto o primeros días de septiembre y primavera, en el mes de noviembre. Tiene por objeto romper la fuerte estacionalidad que genera el Festival de Doma y Folclore. Por este han pasado distintos artistas variando la propuesta de acuerdo a los géneros. ",
+    "contenido":"4 Estaciones es un festival gratuito, que se realiza en la plaza principal de Jesús María, desagregado a lo largo del año. Son cuatro fechas que se desarrollan en la segunda mitad del verano, hacia fines de febrero o principios de marzo, en otoño, por lo general en mayo, invierno, en agosto o primeros días de septiembre y primavera, en el mes de noviembre. Tiene por objeto romper la fuerte estacionalidad que genera el Festival de Doma y Folclore. Por este han pasado distintos artistas variando la propuesta de acuerdo a los géneros.",
+    "img":["./assets/img/noticias/renga/1.jpg","./assets/img/noticias/renga/2.jpg","./assets/img/noticias/renga/3.jpg"],
+    "img_thumbnail":"./assets/img/eventos/4_estaciones/thumb.jpg"
+  },
+  {
+    "id":2,
+    "fecha":1506343884780,
+    "categoria":1,
+    "destacado":false,
+    "titulo":"Carnaval y Quema del Rey Momo",
+    "extracto":"En Jesús María se han desarrollado carnavales desde los inicios de la villa. Han ido variando en el tiempo. Hoy es una fiesta popular y gratuita donde participan comparsas, carrozas y disfrazados de la zona.",
+    "contenido":"En Jesús María se han desarrollado carnavales desde los inicios de la villa. Han ido variando en el tiempo. Hoy es una fiesta popular y gratuita donde participan comparsas, carrozas y disfrazados de la zona.",
+    "img":["./assets/img/noticias/caminos/1.jpg","./assets/img/noticias/caminos/2.jpg"],
+    "img_thumbnail":"./assets/img/eventos/carnavales/thumb.jpg"
+  },
+  {
+    "id":3,
+    "fecha":1506343884780,
+    "categoria":1,
+    "destacado":false,
+    "titulo":"Jesús María Gourmet",
+    "extracto":"Es un torneo de cocina clasificatorio para el Córdoba Cocina y al Torneo Argentino de Chefs. Participan establecimientos gastronómicos del Norte con un menú de tres pasos elaborado en dos horas y presentado al jurado. Atento el público sigue el desarrollo del evento en las tribunas con una vista inmejorable del proceso de elaboración de estos maestros de la cocina. Su fecha es variable ya que se encuentra supeditada a los campeonatos superiores pero se estima para los primeros días de Junio.",
+    "contenido":"Es un torneo de cocina clasificatorio para el Córdoba Cocina y al Torneo Argentino de Chefs. Participan establecimientos gastronómicos del Norte con un menú de tres pasos elaborado en dos horas y presentado al jurado. Atento el público sigue el desarrollo del evento en las tribunas con una vista inmejorable del proceso de elaboración de estos maestros de la cocina. Su fecha es variable ya que se encuentra supeditada a los campeonatos superiores pero se estima para los primeros días de Junio.",
+    "img":["./assets/img/noticias/asado/1.jpg","./assets/img/noticias/asado/2.jpg","./assets/img/noticias/asado/3.jpg","./assets/img/noticias/asado/4.jpg","./assets/img/noticias/asado/5.jpg"],
+    "img_thumbnail":"./assets/img/eventos/jm_gourmet/thumb.jpg"
+  },
+  {
+    "id":4,
+    "fecha":1506343884780,
+    "categoria":1,
+    "destacado":false,
+    "titulo":"Jesús María Rock",
+    "extracto":"Es un festival de 2 días donde el Rock se adueña del Anfiteatro José Hernández, el predio donde se realiza el Festival de Doma y Folclore de Jesús María. Se desarrolla el fin de semana largo de octubre, sábado y domingo. En su primera edición pasaron Estelares, Kapanga, Catupecu Machu, Las Pastillas del Abuelo, La Vela Puerca y Las Pelotas. Es un festival de gran magnitud que promete.",
+    "contenido":"Es un festival de 2 días donde el Rock se adueña del Anfiteatro José Hernández, el predio donde se realiza el Festival de Doma y Folclore de Jesús María. Se desarrolla el fin de semana largo de octubre, sábado y domingo. En su primera edición pasaron Estelares, Kapanga, Catupecu Machu, Las Pastillas del Abuelo, La Vela Puerca y Las Pelotas. Es un festival de gran magnitud que promete.",
+    "img":["./assets/img/noticias/vuelta/1.jpg","./assets/img/noticias/vuelta/2.jpg"],
+    "img_thumbnail":"./assets/img/eventos/jmr/thumb.jpg"
+  }
+]

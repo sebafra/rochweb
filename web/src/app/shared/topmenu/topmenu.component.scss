@@ -1,0 +1,127 @@
+@import "../../../assets/variables";
+
+.box-shadow {
+    @extend .box-shadow-default;
+}
+
+.top-container {
+    background: $color_1;
+    height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .wsp-button {
+        position: fixed;
+        z-index: 1;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+.wsp-button {
+    display: none;
+
+    @media screen and (max-width: 768px) {
+        position: fixed;
+        z-index: 1;
+        bottom: 10px;
+        left: 10px;
+
+        &.show {
+            display: block;
+        }
+    }
+}
+
+.header {
+    padding: 1em 0;
+    width: 100%;
+    background: #f0f0f0; // @media screen and (max-width: 768px) {
+    //     position: fixed;
+    //     z-index: 1;
+    // }
+    .nav {
+        button {
+            margin: .2em;
+        }
+    }
+
+    .subtitulo {
+        font-style: italic;
+        color: $color_2;
+        margin-top: .5em;
+    }
+
+    nav {
+        background: none;
+        padding: 0;
+
+        .nav-item {
+            margin-left: .4em;
+
+            .nav-link {
+                color: $color_2 !important;
+                background: none !important;
+                border: 2px solid rgba(0, 0, 0, 0);
+
+                &:hover {
+                    background: $color_1 !important;
+                    color: $color_5 !important;
+                    border: 2px solid $color_1;
+                }
+            }
+
+            .nav-link.active {
+                // background: $color_1 !important;
+                color: $color_1 !important;
+                border: 2px solid $color_1;
+
+                &:hover {
+                    background: $color_3 !important;
+
+                    // color: $color_5 !important;
+                    // border: 2px solid $color_1;
+               
+                }
+            }
+        }
+    }
+
+    .navbar {
+        .navbar-brand {
+            max-width: 300px;
+
+            @media screen and (max-width: 768px) {
+                max-width: 200px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .navbar-nav {
+            margin-top: 1em;
+
+            .nav-item {
+                margin-left: .4em; // background: $color_1;
+                margin-bottom: .5em;
+                padding-left: .5em;
+                border-bottom: 1px solid $mediumgray;
+
+                .nav-link {
+                    ::after {
+                        content: ">"; // float: right;
+                   
+                    }
+
+                    &.active {
+                        border: none;
+                        background: none !important;
+
+                        // border-bottom: 2px solid $color_1;
+                        color: $color_1;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<div class="container-fluid">
+
+  <div class="row align-items-center">
+    <div class="col-sm-6">
+      <h1 class="section-title">
+        <i class="fa fa-book"></i> Lista de Banners</h1>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-primary ml-2" (click)="create()">
+        <i class="fa fa-plus"></i> NUEVO BANNER</button>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="10%">Imagen</th>
+          <th >Titulo</th>
+          <th width="15%" class="text-center">Orden</th>
+          <th width="15%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td width="10%">
+           <img [src]="imagesUrl + '/' + item.image" alt="" class="img-fluid">
+          </td>
+          <td>{{ item.title }}</td>
+          <td class="text-center">
+            <button *ngIf="item.order !== items.length" type="button" class="btn btn-info btn-sm" (click)="incrementOrder(item)">
+              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="item.order > 1" type="button" class="btn btn-info btn-sm" (click)="decrementOrder(item)">
+              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td class="text-right">
+            
+            <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="remove(item)">
+              <i class="fa fa-close" aria-hidden="true"></i>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

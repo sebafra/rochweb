@@ -1,0 +1,24 @@
+<h4 class="section-title">
+  Suscriptor</h4>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/suscriptors']">Suscriptores</a>
+  </li>
+  <li class="breadcrumb-item active">Nuevo Suscriptor</li>
+</ol>
+<div class="container-fluid">
+  <form class="w-100 pt-3" [formGroup]="formObject" (ngSubmit)="logForm(formObject.value)">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email">
+        <div *ngIf="!formObject.controls['email'].valid && formObject.controls['email'].touched" class="invalid-feedback">
+          Debe ingresar un Email
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary mb-4" type="submit" block [disabled]="!formObject.valid">
+      <i class="fa fa-paper-plane-o" aria-hidden="true"></i> GUARDAR
+    </button>
+  </form>
+</div>

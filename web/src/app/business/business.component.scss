@@ -1,0 +1,136 @@
+@import "../../assets/variables";
+
+slide {
+    img {
+        max-height: 500px;
+        object-fit: cover;
+    }
+}
+
+.carousel-container {
+    background: $background_color_4;
+}
+
+.carousel-caption {
+    top: 30%;
+    background-color: transparent;
+    width: 40%;
+    left: 10%;
+    height: auto;
+    text-align: left;
+
+    h3 {
+        font-size: 2.5em;
+        font-weight: bold;
+        text-shadow: 3px 0px 2px rgb(45, 45, 45);
+    }
+
+    p {
+        font-size: 1.5em;
+        text-shadow: 3px 0px 2px rgb(45, 45, 45);
+    }
+
+    @media screen and (max-width: 996px) {
+        top: inherit;
+        width: 100%;
+        left: 0;
+        right: 0;
+        height: auto;
+        text-align: center;
+    }
+}
+
+
+
+.seeAll {
+    color: $color_4;
+    text-align: right;
+    font-size: .8em;
+    display: table;
+    height: 3em;
+}
+
+.instagram-feed {
+    background: $dark;
+}
+
+
+.texto-central-container {
+    background: $color_1;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    .lead {
+        font-style: italic;
+        font-size: 1.1em;
+    }
+
+    .texto-central {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        color: $color_3;
+
+        @media screen and (max-width: 768px) {
+            margin-top: .5em;
+            margin-bottom: .5em;
+        }
+
+        .filter-buttons {
+            @media screen and (max-width: 768px) {
+                margin-top: .5em;
+                margin-bottom: 1em;
+                text-align: center;
+            }
+
+            button {
+                border-radius: 30px;
+                margin-right: .5em;
+
+                @media screen and (max-width: 768px) {
+                    border-radius: 20px;
+                    padding: 0.5em;
+                    font-size: 0.8em;
+                    margin-right: 0.1em;
+                }
+            }
+        }
+
+        .search-form {
+            form {
+                justify-content: flex-end;
+
+                .input-group {
+                    width: 100%;
+                    .form-control {
+                        border-radius: 30px;
+                        background: rgba(0, 0, 0, 0.1);
+                        border-color: rgba(0, 0, 0, 0.2);
+                        color: white;
+
+                        &::placeholder {
+                            color: $color_3;
+                        }
+
+                        &:focus {
+                            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+                        }
+                    }
+
+                    .input-group-append {
+                        margin-left: -50px;
+
+                        button {
+                            border: none;
+                            background: none;
+                            color: white;
+
+                            &:hover {
+                                color: $color_1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+<div class="container-fluid">
+
+  <div class="row align-items-center">
+    <div class="col-sm-6">
+      <h1 class="section-title">
+        <i class="fa fa-book"></i> Lista de Vehiculos</h1>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-primary ml-2" (click)="create()">
+        <i class="fa fa-plus"></i> NUEVO VEHICULO</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="10%">Vista Previa</th>
+            <th>Marca
+            <select class="select" name="brand" id="brand" (change)="changeBrand($event)">
+              <option value="null" >Todos</option>
+              <option *ngFor="let brand of brands" value="{{brand._id}}" >{{brand.name}}</option>
+            </select>
+          </th>
+          <th >Modelo</th>
+          <th >Año</th>
+          <th>Estado
+            <select class="select" name="type" id="type" (change)="changeType($event)">
+              <option value="" >Todos</option>
+              <option value=false>Usado</option>
+              <option value=true>0km</option>
+            </select>
+          </th>
+          <th >Precio</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td> 
+            <!-- <ng-template *ngIf="item.images.length > 0"> -->
+              <img onerror="this.src='assets/img/car_template.png'" [src]="imagesUrl + '/' + item.images[0]" alt="" class="img-fluid">
+            <!-- </ng-template> -->
+          </td>
+          <td>{{ item.brand?.name }}</td>
+          <td>{{ item.model?.name }}</td>
+          <td>{{ item?.year }}</td>
+          <td>{{ item?.new ? '0km' : 'Usado'}}</td>
+          <td>${{ item?.price }}</td>
+          <td class="text-right">
+            <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="remove(item)">
+              <i class="fa fa-close" aria-hidden="true"></i>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

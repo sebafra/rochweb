@@ -1,0 +1,121 @@
+<div class="content-container">
+  <div class="container-fluid pl-0 pr-0 carousel-container">
+    <carousel>
+      <slide *ngFor="let item of banners" style="max-width: 1440px; margin: 0 auto;">
+        <img onerror="this.src='assets/img/loader.gif'" [src]="img_url_base + '/' + item.image" alt="first slide" style="display: block; width: 100%;">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>{{ item?.title }}</h3>
+          <p>{{ item?.subtitle }}</p>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+  <div class="texto-central-container">
+    <div class="container">
+      <div class="row texto-central">
+        <div class="col-md-4 filter-buttons">
+          <button [routerLink]="['/catalog', {opportunity: true}]" routerLinkActive="router-link-active" type="button"
+            class="btn btn-outline-light">OPORTUNIDADES</button>
+          <button [routerLink]="['/catalog', {newest: true}]" routerLinkActive="router-link-active" type="button" class="btn btn-outline-light">NOVEDADES</button>
+          <!-- <button [routerLink]="['/catalog', {new: true}]" type="button" class="btn btn-outline-light">0 Km</button>
+          <button [routerLink]="['/catalog', {new: false}]" type="button" class="btn btn-outline-light">USADOS</button> -->
+        </div>
+        <div class="col-md-8 search-form">
+          <form class="form-inline">
+            <div class="input-group mb-3" style="width: 300px; margin-right: 1em;">
+              <select type="text" class="form-control" placeholder="¿Qué estás buscando?" aria-label="Buscá" aria-describedby="button-addon2">
+                <option value="1">Vehículos</option>
+              </select>
+            </div>
+            <div class="input-group mb-3" style="width: 300px">
+              <input type="text" (keyup)="search($event)" class="form-control" placeholder="¿Qué estás buscando?" aria-label="Buscá" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+            <div class="results-container" *ngIf="searchResult.length > 0">
+              <ul>
+                <li *ngFor="let item of searchResult" (click)="toCatalog(item)">{{item?.brand?.name}} {{item?.model?.name}}</li>
+              </ul> 
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="featured-cars">
+      <div class="row card-list">
+        <div *ngFor="let item of cars" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
+          <div class="card mb-2 car-card">
+            <img onerror="this.src='assets/img/loader.gif'" class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]" [offset]="offset">
+            <button *ngIf="item.opportunity" class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
+            <button *ngIf="item.newest" class="btn btn-warning btn-sm new-label">NOVEDAD</button>
+            <button *ngIf="item.year" class="btn btn-light btn-sm year-label">{{item.year}}</button>
+            <div class="card-block p-3">
+              <h4 class="card-title">{{ item.brand.name }} {{ item.model.name }}</h4>
+              <div class="card-text"  *ngIf="item.description" [innerHtml]="item.description | truncate: 80"></div>
+            </div>
+            <div class="card-footer">
+            <div class="row no-gutters">
+              <div *ngIf="item.advance > 0" class="credit">
+                Anticipo de {{item.advance}}
+              </div>
+              <div *ngIf="item.quot && item.quot_price" class="credit">
+                <span *ngIf="item.advance > 0">y</span> {{car?.quot}} cuotas de {{car?.quot_price}}
+              </div>
+                <div class="col price-container"><span class="price">{{item.price}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters instagram-feed">
+    <div class="container">
+      <h2 class="text-secondary text-center mt-4 mb-4"><img onerror="this.src='assets/img/loader.gif'" src="assets/img/instagram.png" alt="" width="150px"></h2>
+      <div id="pixlee_container"></div>
+    </div>
+  </div>
+
+  <div class="cars" hidden="true">
+    <div class="row">
+      <h2 class="col-sm-8">Noticias Recientes</h2>
+      <div class="seeAll col-sm-4">
+        <span>ver todas
+          <i class="fa fa-chevron-right"></i>
+        </span>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm car">
+        <div class="imgContainer">
+          <img alt="" onerror="this.src='assets/img/loader.gif'"  class="img-thumbnail" src="assets/img/loader.gif">
+        </div>
+        <h3 class="titulo">Titulo de la Noticia</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna
+          aliqua. Ut enim ad minim veniam...</p>
+      </div>
+      <div class="col-12 col-sm car">
+        <div class="imgContainer">
+          <img onerror="this.src='assets/img/loader.gif'" alt="" class="img-thumbnail" src="assets/img/loader.gif">
+        </div>
+        <h3 class="titulo">Titulo de la Noticia</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna
+          aliqua. Ut enim ad minim veniam...</p>
+      </div>
+      <div class="col-12 col-sm car">
+        <div class="imgContainer">
+          <img onerror="this.src='assets/img/loader.gif'" alt="" class="img-thumbnail" src="assets/img/loader.gif">
+        </div>
+        <h3 class="titulo">Titulo de la Noticia</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna
+          aliqua. Ut enim ad minim veniam...</p>
+      </div>
+    </div>
+  </div>
+</div>

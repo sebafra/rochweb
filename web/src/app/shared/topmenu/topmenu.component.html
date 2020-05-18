@@ -1,0 +1,86 @@
+<!-- <div class="top-container"></div> -->
+<div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-light bg-faded">
+      <a class="navbar-brand" routerLink="/home">
+        <img alt="" class="img-fluid" src="assets/img/logo.png">
+      </a>
+      <button (click)="toggleCollapse()" aria-controls="navbarSupportedContent" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right collapsed"
+        data-target="#navbarSupportedContent" data-toggle="collapse" type="button" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [class.show]="show" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">INICIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/catalog" routerLinkActive="active">CATEGORIAS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/business" routerLinkActive="active">NOVEDADES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="openModal(contact)">VENDER</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<div #wspbtn class="wsp-button">
+  <a href="whatsapp://send?text=Hola%2C%20te%20escribo%20desde%20la%20web%20de%20montrer.com.ar%20para%20consultarte%20algo&phone=+543516008783&abid=+543516008783">
+    <img src="assets/img/whatsapp.png" alt="" width="70px">
+  </a>
+</div>
+<ng-template #contact>
+  <form class="w-100" [formGroup]="formObject" (ngSubmit)="sendConsult(formObject.value)">
+    <div class="modal-header bg-dark text-light">
+      <h4 class="modal-title pull-left">Nueva Consulta</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span class="text-light" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Ingrese su nombre">
+        <div *ngIf="!formObject.controls['name'].valid && formObject.controls['name'].touched" class="invalid-feedback">
+          debe ingresar su Nombe
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Apellido</label>
+        <input type="text" class="form-control" formControlName="lastname" placeholder="Ingrese su Apellido">
+        <div *ngIf="!formObject.controls['lastname'].valid && formObject.controls['lastname'].touched" class="invalid-feedback">
+          debe ingresar su Apellido
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Ingrese su email">
+        <div *ngIf="!formObject.controls['email'].valid && formObject.controls['email'].touched" class="invalid-feedback">
+          debe ingresar su Email
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Consulta</label>
+        <textarea type="text" class="form-control" placeholder="Ingrese su consulta" formControlName="description" rows="5"></textarea>
+        <div *ngIf="!formObject.controls['description'].valid && formObject.controls['description'].touched" class="invalid-feedback">
+          debe ingresar su Consulta
+        </div>
+      </div>
+      <div *ngIf="!canSend" class="float-left">
+        <re-captcha (resolved)="resolved($event)" [siteKey]="recaptcha_key"></re-captcha>
+      </div>
+    </div>
+    <div class="modal-footer float-left float-md-right">
+      <!-- <div *ngIf="canSend"> -->
+        <span *ngIf="loading"> <i class="fa fa-circle-o-notch fa-spin fa-fw text-danger" aria-hidden="true"></i>
+          Enviando....</span>
+        <button *ngIf="!loading" class="btn btn-primary default text-right" type="submit" block>Enviar</button>
+      <!-- </div> -->
+    </div>
+  </form>
+</ng-template>

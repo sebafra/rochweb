@@ -1,0 +1,30 @@
+<div class="content-container">
+  <div class="container-fluid pl-0 pr-0 carousel-container">
+    <carousel>
+      <slide *ngFor="let item of banners" style="max-width: 1440px; margin: 0 auto;">
+        <img onerror="this.src='assets/img/loader.gif'" [src]="item.image" alt="first slide" style="display: block; width: 100%;">
+        <div class="carousel-caption d-none d-md-block">
+          <h3>{{ item?.title }}</h3>
+          <p>{{ item?.subtitle }}</p>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7 p-4">
+        <h1>MONTRER MULTIMARCAS</h1>
+        <p class="lead mb-4">
+          Somos una empresa del rubro automotriz dedicada al comercio de vehículos multimarca, tanto usados como 0 km. En nuestra
+          trayectoria de mas de 25 años fuimos creando nuestra identidad y perfeccionándonos desde el principio para hoy ser
+          reconocida como lo que somos, una pyme con una imagen corporativa firme y reconocida por nuestros clientes. Montrer se
+          diferencia de las demás mediante la atención personalizada y acompañando al cliente en todo su proceso, guiándolo en
+          todas sus consultas e inquietudes.
+        </p>
+      </div>
+      <div class="col-sm-5 p-4">
+        <div #gmap style="width:100%;height:300px"></div>
+      </div>
+    </div>
+  </div>
+</div>
