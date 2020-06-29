@@ -1,0 +1,95 @@
+<h4 class="section-title">
+  Artículo</h4>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/articles']">Artículos</a>
+  </li>
+  <li class="breadcrumb-item active">Nuevo Artículo</li>
+</ol>
+<div class="container-fluid">
+  <form class="w-100 pt-3" [formGroup]="formObject" (ngSubmit)="logForm(formObject.value)">
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="category">Categoría</label>
+        <select class="form-control" id="category" (change)="changeCategory($event)">
+          <option value="" disabled selected>Seleccione una Categoría</option>
+          <option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="subcategory">Subcategoría</label>
+        <select class="form-control" id="subcategory" formControlName="subcategory" >
+          <option value="" disabled selected>Seleccione una Subcategoría</option>
+          <option value="{{subcategory.id}}" *ngFor="let subcategory of subcategories">{{subcategory.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="condition">Estado</label>
+        <select class="form-control" id="type" formControlName="condition">
+          <option value="0">Usado</option>
+          <option value="1">Nuevo</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="price">Precio</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)"
+            formControlName="price">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea type="text" rows="10" class="form-control" formControlName="description" id="description"></textarea>
+    </div>
+
+    <!-- <div class="card" style="background-color: #e3ebf7">
+      <div class="card-body">
+        <div class="row no-gutters">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="opportunity" formControlName="opportunity">
+              <label class="form-check-label" for="opportunity">Oportunidad</label>
+            </div>
+          </div>
+          <div class="form-check col-md-6">
+            <input type="checkbox" class="form-check-input" id="newest" formControlName="newest">
+            <label class="form-check-label" for="newest">Nuevo lanzamiento</label>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <br>
+    <div class="card-deck rounded" style="background-color: #e3ebf7">
+      <div class="form-group col-md-10">
+        <label for="image">Agregar foto del Artículo</label>
+        <input type="file" class="form-control-file" id="image" aria-describedby="fileHelp" (change)="onChange($event)">
+      </div>
+    </div>
+    <div>
+      <span *ngIf="loading"> <i class="fa fa-circle-o-notch fa-spin fa-fw text-danger" aria-hidden="true"></i>
+        Enviando....</span>
+
+    </div>
+    <div *ngIf="!loading" class="card-deck rounded pb-2" style="background-color: #e3ebf7">
+      <div class="card list-image-card" *ngFor="let image of images">
+        <button *ngIf="image" type="button" class="btn  btn-danger" style="float: right;" (click)="deleteImage(image)">X</button>
+        <img *ngIf="image" [src]="imagesUrl + '/' + image" alt="" class="card-img-top img-fluid">
+      </div>
+    </div>
+    <hr style="border-width: 2px">
+    <button *ngIf="!loading" class="btn btn-primary mb-4 float-right" type="submit" block [disabled]="!formObject.valid">
+      <i class="fa fa-paper-plane-o" aria-hidden="true"></i> GUARDAR
+    </button>
+  </form>
+</div>

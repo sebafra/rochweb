@@ -3,7 +3,7 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center">
       <p>&nbsp;</p>
-      <h3 class="section-title">Ingreso Administrador</h3>
+      <h3 class="section-title">Ingreso a Rochman</h3>
       <p>&nbsp;</p>
       <form [formGroup]="formObject" (ngSubmit)="onSubmit(formObject.value)" novalidate>
         <div class="form-group text-left">
@@ -14,7 +14,7 @@
           <label for="password">Contraseña</label>
           <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
         </div>
-        <p>&nbsp;</p>
+        <p class="mt-4 mb-4">No tenés cuenta? <a routerLink="/register" routerLinkActive="active">Registrate</a> </p>
         <button [disabled]="!formObject.valid" type="submit" class="btn btn-primary btn-block">INGRESAR</button>
       </form>
     </div>

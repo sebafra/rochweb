@@ -28,7 +28,8 @@ export class BasesComponent implements OnInit {
   ) {
   }
   edit(item) {
-    this.router.navigate([this.getBaseURI() + '/' + item._id]);
+    console.log("Edit item: ",item);
+    this.router.navigate([this.getBaseURI() + '/' + item.id]);
   }
   remove(item) {
     if (!confirm('¿Esta seguro que desea eliminar este elemento?')) {

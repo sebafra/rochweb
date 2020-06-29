@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Constants } from '../../app.constants';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { StoreService } from 'app/services/store.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -11,29 +12,17 @@ import { Router } from '@angular/router';
 export class SidemenuComponent implements OnInit {
   subscriptionUpdateUserService: Subscription;
   isLoggedIn: boolean = false;
-  userId: string = undefined;
-  userName: string;
+  user: string = undefined;
+  isAdmin: boolean;
 
   constructor(
 
-    private router: Router
+    private router: Router,
+    private storeService: StoreService
   ) {
-    this.loadUser();
-    if (this.userId) {
-    }
-
+    this.isAdmin = this.storeService.isAdmin();
+    this.isLoggedIn = this.storeService.isLoggedIn();
   }
-
-  loadUser() {
-    this.userId = localStorage.getItem('PENIEL_USUARIO_ID');
-    this.userName = localStorage.getItem('PENIEL_USUARIO_NOMBRE');
-
-    if (this.userId) {
-      this.isLoggedIn = true;
-    }
-
-  }
-
 
   ngOnInit() {
     console.log('Login');

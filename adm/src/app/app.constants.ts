@@ -7,14 +7,19 @@ export class Constants {
   public static BASE_URL='';
 
   public static IS_ADMIN_LOGIN = false;
+  public static LOGGED_USER = {};
+  public static STORAGE = {
+    user: "rochman_user"
+  };
 
-  public static API_METHOD_BRANDS = '/brands'
-  public static API_METHOD_MODELS = '/models'
-  public static API_METHOD_SUSCRIPTORS = '/suscriptors'
+  public static API_METHOD_CATEGORIES = '/categories'
+  public static API_METHOD_SUBCATEGORY = '/subcategories'
+  public static API_METHOD_USERS = '/users'
   public static API_METHOD_BANNERS = '/banners'
-  public static API_METHOD_VEHICLES = '/vehicles'
-  public static API_METHOD_LOGIN = '/administrators/login'
-  public static API_FILE_UPLOAD = '/fileupload'
+  public static API_METHOD_ARTICLES = '/articles'
+  public static API_METHOD_LOGIN = '/users/login'
+  //public static API_METHOD_LOGIN = '/administrators/login'
+  public static API_FILE_UPLOAD = '/files/upload'
   static API_METHOD_MAIL_SEND: string;
 
 

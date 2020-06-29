@@ -10,10 +10,8 @@ const articleSchema = new Schema(
         subcategory: { type: Schema.Types.ObjectId, ref: 'subCategory' },
         user: { type: Schema.Types.ObjectId, ref: 'user' },
         images: [{ type: String }],
-        enabled: { type: Boolean, default: true },
-        condition: { type: String },
-        latitude: { type: String },
-        longitude: { type: String }
+        enabled: { type: Boolean, default: false },
+        condition: { type: String }
     },
     {
         timestamps: true

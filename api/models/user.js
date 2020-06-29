@@ -6,11 +6,12 @@ const userSchema = new Schema(
         firstName: { type: String },
         lastName: { type: String },
         email: { type: String },
-        username: { type: String },
+        user: { type: String },
         password: { type: String },
         celular: { type: String },
         latitude: { type: String },
-        longitude: { type: String }
+        longitude: { type: String },
+        role: { type: Number, default: 1 } // 1: user , 0: admin
     },
     {
         timestamps: true

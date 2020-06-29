@@ -37,17 +37,32 @@ export class StoreService implements CanActivate {
     if (res.status && res.status === 'nok') {
       alert('error en login')
     }
+    localStorage.setItem(Constants.STORAGE.user, JSON.stringify(res.user));
     localStorage.setItem('token', String(res.token))
+    Constants.LOGGED_USER = res.user;
+    if(res.user.role == 0){
+      Constants.IS_ADMIN_LOGIN = true;
+    }
     this.router.navigateByUrl('/')
   }
 
   logout() {
-    localStorage.clear()
+    //localStorage.clear()
+    localStorage.removeItem(Constants.STORAGE.user);
     this.router.navigateByUrl('/login')
   }
 
   isLoggedIn() {
     return localStorage.getItem('token') !== null
+  }
+
+  isAdmin() {
+    let ret = false;
+    let user: any = localStorage.getItem(Constants.STORAGE.user);
+    if((JSON.parse(user)).role == 0){
+      ret = true;
+    }
+    return ret;
   }
 
 

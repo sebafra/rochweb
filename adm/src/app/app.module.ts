@@ -23,33 +23,35 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SidemenuComponent } from './shared/sidemenu/sidemenu.component';
 import { TopmenuComponent } from './shared/topmenu/topmenu.component';
-import { BrandsComponent } from './brands/brands.component';
-import { BrandComponent } from './brand/brand.component';
-import { ModelsComponent } from './models/models.component';
-import { ModelComponent } from './model/model.component';
-import { SuscriptorComponent } from './suscriptor/suscriptor.component';
-import { SuscriptorsComponent } from './suscriptors/suscriptors.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryComponent } from './category/category.component';
+import { SubcategoriesComponent } from './subcategories/subcategories.component';
+import { SubcategoryComponent } from './subcategory/subcategory.component';
+//import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
 import { BannersComponent } from './banners/banners.component';
 import { BannerComponent } from './banner/banner.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
+import { ArticleComponent } from './article/article.component';
+import { ArticlesComponent } from './articles/articles.component';
 import { LoginComponent } from './login/login.component';
 import { StoreService } from './services/store.service';
 import { BaseComponent } from './base/base.component';
 import { BasesComponent } from './bases/bases.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'brands', pathMatch: 'full'},
-  { path: 'brands', component: BrandsComponent, canActivate: [StoreService] },
-  { path: 'brand/:id', component: BrandComponent, canActivate: [StoreService]  },
-  { path: 'models', component: ModelsComponent, canActivate: [StoreService] },
-  { path: 'model/:id', component: ModelComponent, canActivate: [StoreService] },
-  { path: 'suscriptors', component: SuscriptorsComponent, canActivate: [StoreService] },
-  { path: 'suscriptor/:id', component: SuscriptorComponent, canActivate: [StoreService] },
+  { path: '', redirectTo: 'articles', pathMatch: 'full'},
+  { path: 'categories', component: CategoriesComponent, canActivate: [StoreService]  },
+  { path: 'category/:id', component: CategoryComponent, canActivate: [StoreService] },
+  { path: 'subcategories', component: SubcategoriesComponent, canActivate: [StoreService] },
+  { path: 'subcategories/:id', component: SubcategoryComponent, canActivate: [StoreService] },
+  { path: 'users', component: UsersComponent, canActivate: [StoreService] },
+  //{ path: 'user/:id', component: UserComponent, canActivate: [StoreService] },
   { path: 'banners', component: BannersComponent, canActivate: [StoreService] },
   { path: 'banner/:id', component: BannerComponent, canActivate: [StoreService] },
-  { path: 'vehicles', component: VehiclesComponent, canActivate: [StoreService] },
-  { path: 'vehicle/:id', component: VehicleComponent, canActivate: [StoreService] },
+  { path: 'articles', component: ArticlesComponent, canActivate: [StoreService] },
+  { path: 'article/:id', component: ArticleComponent, canActivate: [StoreService] },
+  { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent}
 ]
 
@@ -59,19 +61,20 @@ const routes: Routes = [
     HomeComponent,
     SidemenuComponent,
     TopmenuComponent,
-    BrandsComponent,
-    BrandComponent,
-    ModelsComponent,
-    ModelComponent,
-    SuscriptorComponent,
-    SuscriptorsComponent,
+    CategoriesComponent,
+    CategoryComponent,
+    SubcategoriesComponent,
+    SubcategoryComponent,
+    //UserComponent,
+    UsersComponent,
     BannersComponent,
     BannerComponent,
-    VehicleComponent,
-    VehiclesComponent,
+    ArticleComponent,
+    ArticlesComponent,
     LoginComponent,
     BaseComponent,
-    BasesComponent
+    BasesComponent,
+    RegisterComponent
   ],
   imports: [
     ApplicationPipes,

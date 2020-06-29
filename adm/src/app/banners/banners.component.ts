@@ -64,7 +64,7 @@ export class BannersComponent extends BasesComponent {
   }
 
   getItems(filters) {
-    this.baseService.getAllSorted(filters, {order: 1}, {}).then(items => {
+    this.baseService.getAllSorted(filters, {order: 1}, []).then(items => {
       this.items = items
     });
   }

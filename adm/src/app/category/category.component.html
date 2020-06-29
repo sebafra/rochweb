@@ -1,0 +1,24 @@
+<h4 class="section-title">
+  Categoría</h4>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a [routerLink]="['/categories']">Categorías</a>
+  </li>
+  <li class="breadcrumb-item active">Nueva</li>
+</ol>
+<div class="container-fluid">
+  <form class="w-100 pt-3" [formGroup]="formObject" (ngSubmit)="logForm(formObject.value)">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="name">Categoría</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <div *ngIf="!formObject.controls['name'].valid && formObject.controls['name'].touched" class="invalid-feedback">
+          Debe ingresar una categoría
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary mb-4" type="submit" block [disabled]="!formObject.valid">
+      <i class="fa fa-paper-plane-o" aria-hidden="true"></i> GUARDAR
+    </button>
+  </form>
+</div>
