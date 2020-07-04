@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef, Renderer2, TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { CarService } from '../../services/car.service';
+import { ArticleService } from '../../services/article.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Constants } from '../../app.constants';
 
@@ -9,7 +9,7 @@ import { Constants } from '../../app.constants';
   selector: 'app-topmenu',
   templateUrl: './topmenu.component.html',
   styleUrls: ['./topmenu.component.scss'],
-  providers: [CarService]
+  providers: [ArticleService]
 })
 export class TopmenuComponent implements OnInit {
   show: any;
@@ -25,7 +25,7 @@ export class TopmenuComponent implements OnInit {
     private formBuilder: FormBuilder,
     private renderer2: Renderer2,
     private modalService: BsModalService,
-    private carService: CarService
+    private carService: ArticleService
     ) {
     this.renderer.listenGlobal('window', 'scroll', (evt) => { this.updatePosition(evt); });
   }

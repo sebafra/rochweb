@@ -35,7 +35,7 @@
             </div>
             <div class="results-container" *ngIf="searchResult.length > 0">
               <ul>
-                <li *ngFor="let item of searchResult" (click)="toCatalog(item)">{{item?.brand?.name}} {{item?.model?.name}}</li>
+                <li *ngFor="let item of searchResult" (click)="toCatalog(item)">{{item?.category?.name}} {{item?.subcategory?.name}}</li>
               </ul> 
             </div>
           </form>
@@ -46,14 +46,15 @@
   <div class="container">
     <div class="featured-cars">
       <div class="row card-list">
-        <div *ngFor="let item of cars" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
+        <div *ngFor="let item of articles" class="col-sm-6 col-md-4 col-lg-4" (click)="showArticle(item)">
           <div class="card mb-2 car-card">
             <img onerror="this.src='assets/img/loader.gif'" class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]" [offset]="offset">
             <button *ngIf="item.opportunity" class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
             <button *ngIf="item.newest" class="btn btn-warning btn-sm new-label">NOVEDAD</button>
             <button *ngIf="item.year" class="btn btn-light btn-sm year-label">{{item.year}}</button>
             <div class="card-block p-3">
-              <h4 class="card-title">{{ item.brand.name }} {{ item.model.name }}</h4>
+              <h4 class="card-title">{{ item?.name }}</h4>
+              <div class="card-text">{{ item?.subcategory?.category?.name }} {{ item?.subcategory?.name }}</div>
               <div class="card-text"  *ngIf="item.description" [innerHtml]="item.description | truncate: 80"></div>
             </div>
             <div class="card-footer">
@@ -62,7 +63,7 @@
                 Anticipo de {{item.advance}}
               </div>
               <div *ngIf="item.quot && item.quot_price" class="credit">
-                <span *ngIf="item.advance > 0">y</span> {{car?.quot}} cuotas de {{car?.quot_price}}
+                <span *ngIf="item.advance > 0">y</span> {{article?.quot}} cuotas de {{article?.quot_price}}
               </div>
                 <div class="col price-container"><span class="price">{{item.price}}</span></div>
               </div>
@@ -72,12 +73,12 @@
       </div>
     </div>
   </div>
-  <div class="row no-gutters instagram-feed">
+  <!-- <div class="row no-gutters instagram-feed">
     <div class="container">
       <h2 class="text-secondary text-center mt-4 mb-4"><img onerror="this.src='assets/img/loader.gif'" src="assets/img/instagram.png" alt="" width="150px"></h2>
       <div id="pixlee_container"></div>
     </div>
-  </div>
+  </div> -->
 
   <div class="cars" hidden="true">
     <div class="row">

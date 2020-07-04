@@ -2,8 +2,9 @@
   <div class="row no-gutters">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Vehículos</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{car?.brand?.name}} {{car?.model?.name}}</li>
+        <li class="breadcrumb-item"><a href="#">Artículos</a></li>
+        <li class="breadcrumb-item"><a href="#">{{article?.subcategory?.category?.name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{article?.subcategory?.name}}</li>
       </ol>
     </nav>
   </div>
@@ -13,7 +14,7 @@
         <img [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + imageSelected" class="img-fluid featured">
       </div>
       <div class="row thumb-list">
-        <div *ngFor="let item of car?.images">
+        <div *ngFor="let item of article?.images">
           <img [defaultImage]="loader" [lazyLoad]="img_url_base + '/small-' + item" (click)="changeImageSelected(item)"
             class="img-fluid" [ngClass]="{'active': item === imageSelected}">
         </div>
@@ -23,8 +24,9 @@
       <div class="detail-container title-block">
         <div class="row no-gutters">
           <div>
-            <h1>{{car?.brand?.name}} {{car?.model?.name}}</h1>
-            <h2>{{car?.description}}</h2>
+            <p class="text-muted m-0">{{article?.subcategory?.category?.name}} {{article?.subcategory?.name}}</p>
+            <h1>{{article?.name}}</h1>
+            <h2>{{article?.description}}</h2>
           </div>
         </div>
       </div>
@@ -33,17 +35,17 @@
           <div class="col-sm-6">
             <dl>
               <dt><i class="fa fa-car text-danger"></i> Condición</dt>
-              <dd>{{car?.new ? '0 km' : 'Usado'}}</dd>
+              <dd>{{article?.condition}}</dd>
               <dt><i class="fa fa-fire text-danger"></i> Combustible</dt>
-              <dd>{{car?.fuel | uppercase}}</dd>
+              <dd>{{article?.fuel | uppercase}}</dd>
             </dl>
           </div>
           <div class="col-sm-6">
             <dl>
               <dt><i class="fa fa-calendar text-danger"></i> Año</dt>
-              <dd>{{car?.year}}</dd>
+              <dd>{{article?.year}}</dd>
               <dt><i class="fa fa-dashboard text-danger"></i> Kilometraje</dt>
-              <dd>{{car?.km ? car?.km : '__' }}</dd>
+              <dd>{{article?.km ? article?.km : '__' }}</dd>
             </dl>
           </div>
           <div class="col-sm-6"></div>
@@ -52,16 +54,13 @@
       <div class="detail-container price-block">
         <div class="row no-gutters">
           <div class="row col-sm-6 no-gutters">
-            <div *ngIf="car?.advance > 0" class="finance-container">
-              Anticipo de {{car?.advance}}
-            </div>
-            <div *ngIf="car?.quot && car?.quot_price" class="finance-container">
-              <span *ngIf="car?.advance > 0">y</span> {{car?.quot}} cuotas de {{car?.quot_price}}
+            <div *ngIf="article?.advance > 0" class="finance-container">
+              Anticipo de {{article?.advance}}
             </div>
           </div>
           <div class="col-sm-6 price-container">
-            <span *ngIf="car?.price_discount" class="text-danger">${{car?.price_discount}}</span>
-            <span *ngIf="!car?.price_discount" class="text-danger">${{car?.price}}</span>
+            <!-- <span *ngIf="article?.price_discount" class="text-danger">${{article?.price_discount}}</span> -->
+            <span *ngIf="!article?.price_discount" class="text-danger">${{article?.price}}</span>
           </div>
         </div>
       </div>
@@ -89,15 +88,15 @@
       </div>
     </div>
   </div>
-  <div class="row features-block">
+  <!-- <div class="row features-block">
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Seguridad</h4>
-          <p class="card-text" *ngIf="car?.airbag_pilot"><i class="fa fa-check text-danger"></i>Airbag Piloto</p>
-          <p class="card-text" *ngIf="car?.airbag_co_pilot"><i class="fa fa-check text-danger"></i>Airbag Co-Piloto</p>
-          <p class="card-text" *ngIf="car?.direction"><i class="fa fa-check text-danger"></i>Dirección Hidraulica</p>
-          <p class="card-text" *ngIf="car?.abs_brakes"><i class="fa fa-check text-danger"></i>Frenos ABS</p>
+          <p class="card-text" *ngIf="article?.airbag_pilot"><i class="fa fa-check text-danger"></i>Airbag Piloto</p>
+          <p class="card-text" *ngIf="article?.airbag_co_pilot"><i class="fa fa-check text-danger"></i>Airbag Co-Piloto</p>
+          <p class="card-text" *ngIf="article?.direction"><i class="fa fa-check text-danger"></i>Dirección Hidraulica</p>
+          <p class="card-text" *ngIf="article?.abs_brakes"><i class="fa fa-check text-danger"></i>Frenos ABS</p>
         </div>
       </div>
     </div>
@@ -105,22 +104,22 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Confort</h4>
-          <p class="card-text" *ngIf="car?.cold_air"><i class="fa fa-check text-danger"></i>Aire Acondicionado</p>
-          <p class="card-text" *ngIf="car?.hot_air"><i class="fa fa-check text-danger"></i>Calefacción</p>
-          <p class="card-text" *ngIf="car?.central_locking"><i class="fa fa-check text-danger"></i>Cierre Centralizado</p>
-          <p class="card-text" *ngIf="car?.steeringWheel_commands"><i class="fa fa-check text-danger"></i>Comandos en el
+          <p class="card-text" *ngIf="article?.cold_air"><i class="fa fa-check text-danger"></i>Aire Acondicionado</p>
+          <p class="card-text" *ngIf="article?.hot_air"><i class="fa fa-check text-danger"></i>Calefacción</p>
+          <p class="card-text" *ngIf="article?.central_locking"><i class="fa fa-check text-danger"></i>Cierre Centralizado</p>
+          <p class="card-text" *ngIf="article?.steeringWheel_commands"><i class="fa fa-check text-danger"></i>Comandos en el
             Volante</p>
-          <p class="card-text" *ngIf="car?.front_liftsCrystals"><i class="fa fa-check text-danger"></i>Limpia Parabrisas
+          <p class="card-text" *ngIf="article?.front_liftsCrystals"><i class="fa fa-check text-danger"></i>Limpia Parabrisas
             frontal</p>
-          <p class="card-text" *ngIf="car?.back_liftsCrystals"><i class="fa fa-check text-danger"></i>Limpia Parabrisas
+          <p class="card-text" *ngIf="article?.back_liftsCrystals"><i class="fa fa-check text-danger"></i>Limpia Parabrisas
             trasero</p>
-          <p class="card-text" *ngIf="car?.navigation_system"><i class="fa fa-check text-danger"></i>Sistema de
+          <p class="card-text" *ngIf="article?.navigation_system"><i class="fa fa-check text-danger"></i>Sistema de
             Navegación (GPS)</p>
-          <p class="card-text" *ngIf="car?.leather"><i class="fa fa-check text-danger"></i>Tapizado de cuero</p>
-          <p class="card-text" *ngIf="car?.cruise_control"><i class="fa fa-check text-danger"></i>Velocidad crucero</p>
-          <p class="card-text" *ngIf="car?.usb"><i class="fa fa-check text-danger"></i>Puertos USB</p>
-          <p class="card-text" *ngIf="car?.bluetooth"><i class="fa fa-check text-danger"></i>Bluetooth</p>
-          <p class="card-text" *ngIf="car?.electric_starter"><i class="fa fa-check text-danger"></i>Encendido Eléctrico</p>
+          <p class="card-text" *ngIf="article?.leather"><i class="fa fa-check text-danger"></i>Tapizado de cuero</p>
+          <p class="card-text" *ngIf="article?.cruise_control"><i class="fa fa-check text-danger"></i>Velocidad crucero</p>
+          <p class="card-text" *ngIf="article?.usb"><i class="fa fa-check text-danger"></i>Puertos USB</p>
+          <p class="card-text" *ngIf="article?.bluetooth"><i class="fa fa-check text-danger"></i>Bluetooth</p>
+          <p class="card-text" *ngIf="article?.electric_starter"><i class="fa fa-check text-danger"></i>Encendido Eléctrico</p>
         </div>
       </div>
     </div>
@@ -128,15 +127,15 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Exterior</h4>
-          <p class="card-text" *ngIf="car?.headlights"><i class="fa fa-check text-danger"></i>Faros antiniebla</p>
-          <p class="card-text" *ngIf="car?.tires"><i class="fa fa-check text-danger"></i>LLantas</p>
-          <p class="card-text" *ngIf="car?.parking_sensor"><i class="fa fa-check text-danger"></i>Sensor de
+          <p class="card-text" *ngIf="article?.headlights"><i class="fa fa-check text-danger"></i>Faros antiniebla</p>
+          <p class="card-text" *ngIf="article?.tires"><i class="fa fa-check text-danger"></i>LLantas</p>
+          <p class="card-text" *ngIf="article?.parking_sensor"><i class="fa fa-check text-danger"></i>Sensor de
             estacionamiento</p>
-          <p class="card-text" *ngIf="car?.polarized"><i class="fa fa-check text-danger"></i>Vidrios polarizados</p>
+          <p class="card-text" *ngIf="article?.polarized"><i class="fa fa-check text-danger"></i>Vidrios polarizados</p>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <hr>
   <div class="related-block no-gutters mb-4">
     <h2 class="block-title">
@@ -170,7 +169,7 @@
 <ng-template #consult>
   <form class="w-100" [formGroup]="formObject" (ngSubmit)="sendConsult(formObject.value)">
     <div class="modal-header bg-dark text-light">
-      <h4 class="modal-title pull-left">Consulta por {{car?.brand.name}} {{car?.model.name}}</h4>
+      <h4 class="modal-title pull-left">Consulta por {{article?.brand.name}} {{article?.model.name}}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span class="text-light" aria-hidden="true">&times;</span>
       </button>

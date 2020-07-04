@@ -7,7 +7,7 @@ const articleSchema = new Schema(
         description: { type: String },
         price: { type: String },
         tags: { type: String },
-        subcategory: { type: Schema.Types.ObjectId, ref: 'subCategory' },
+        subcategory: { type: Schema.Types.ObjectId, ref: 'subcategory' },
         user: { type: Schema.Types.ObjectId, ref: 'user' },
         images: [{ type: String }],
         enabled: { type: Boolean, default: false },

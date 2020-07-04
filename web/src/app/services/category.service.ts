@@ -3,9 +3,9 @@ import { Constants } from '../app.constants';
 import { BaseService } from './base.service';
 
 @Injectable()
-export class BrandService extends BaseService {
+export class CategoryService extends BaseService {
 
   getApiEndPoint() {
-    return Constants.API_METHOD_BRANDS;
+    return Constants.API_METHOD_CATEGORIES;
   }
 }

@@ -16,7 +16,7 @@ import { TopmenuComponent } from './shared/topmenu/topmenu.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { CatalogComponent } from './catalog/catalog.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
+import { ArticleComponent } from './article/article.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastModule } from 'ng2-toastr';
 import { BusinessComponent } from './business/business.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'business', component: BusinessComponent },
-  { path: 'vehicle/:id', component: VehicleComponent },
+  { path: 'article/:id', component: ArticleComponent },
 ];
 
 @NgModule({
@@ -37,7 +37,7 @@ const routes: Routes = [
     FooterComponent,
     TruncatePipe,
     CatalogComponent,
-    VehicleComponent,
+    ArticleComponent,
     BusinessComponent
   ],
   imports: [

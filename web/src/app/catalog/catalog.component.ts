@@ -1,27 +1,27 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { CarService } from '../services/car.service';
+import { ArticleService } from '../services/article.service';
 import { environment } from '../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { BrandService } from '../services/brand.service';
-import { ModelService } from '../services/model.service';
+import { CategoryService } from '../services/category.service';
+import { SubcategoryService } from '../services/subcategory.service';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss'],
-  providers: [CarService, ModelService]
+  providers: [ArticleService, SubcategoryService]
 })
 export class CatalogComponent implements OnInit {
-  cars: any = [];
-  carsFiltered: any = [];
+  articles: any = [];
+  articlesFiltered: any = [];
   objectKeys = Object.keys;
 
   textSearch: any = '';
   years: any = [];
-  brands: any = [];
-  models: any = [];
+  categorys: any = [];
+  subcategorys: any = [];
   new: Boolean;
   img_url_base: any = environment.imagesUrl;
   loader: any = './assets/img/loader.gif';
@@ -32,14 +32,14 @@ export class CatalogComponent implements OnInit {
   private sub: any;
   searchResult: any = [];
 
-  brandSelected: any ;
-  modelSelected: any;
+  categorySelected: any ;
+  subcategorySelected: any;
   yearSelected: any ;
 
   constructor(
     private modalService: BsModalService,
-    private modelService: ModelService,
-    public carService: CarService,
+    private subcategoryService: SubcategoryService,
+    public carService: ArticleService,
     public router: Router,
     private route: ActivatedRoute
   ) {
@@ -56,7 +56,7 @@ export class CatalogComponent implements OnInit {
     }
     console.log('filters ', this.filters);
     });
-    this.loadCars();
+    this.loadArticles();
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
@@ -64,25 +64,25 @@ export class CatalogComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  loadCars() {
+  loadArticles() {
     this.loader = true;
-    this.carService.getAllSorted(this.filters, null, { timestamp: 1 }, ['brand', 'model'])
+    this.carService.getAllSorted(this.filters, null, { timestamp: 1 }, ['category', 'subcategory'])
       .then(res => {
-        this.carsFiltered = res;
+        this.articlesFiltered = res;
         this.loader = false;
-        console.log('this.carsFiltered: ', this.carsFiltered);
-        return this.carService.getAllSorted({}, null, { timestamp: 1 }, ['brand', 'model']);
+        console.log('this.articlesFiltered: ', this.articlesFiltered);
+        return this.carService.getAllSorted({}, null, { timestamp: 1 }, ['category', 'subcategory']);
       })
       .then(res => {
-        this.cars = res;
-        console.log('All cars: ', this.cars);
-        this.getBrands();
+        this.articles = res;
+        console.log('All articles: ', this.articles);
+        this.getCategories();
         this.getYears();
       });
   }
 
   showVehicle(item) {
-    this.router.navigate(['/vehicle', item.id]);
+    this.router.navigate(['/article', item.id]);
   }
 
   deleteFilter(prop) {
@@ -100,13 +100,13 @@ export class CatalogComponent implements OnInit {
       .then(response => {
         const res: any = response;
         console.log({ response });
-        this.carsFiltered = res.vehicles;
+        this.articlesFiltered = res.articles;
         this.loader = false;
       })
       .catch(error => {
         console.log({ error });
         alert(error.message);
-        this.carsFiltered = [];
+        this.articlesFiltered = [];
         this.loader = false;
       });
   }
@@ -133,35 +133,35 @@ export class CatalogComponent implements OnInit {
   }
 
 getYears () {
-  for (let i = 0; i < this.cars.length; i++) {
+  for (let i = 0; i < this.articles.length; i++) {
     if (this.years.filter(el => {
-      return (el === this.cars[i].year);
+      return (el === this.articles[i].year);
     }).length <= 0) {
-      this.years.push(this.cars[i].year);
+      this.years.push(this.articles[i].year);
     }
   }
   console.log('years: ', this.years);
 
 }
- getBrands () {
+ getCategories () {
 
-   for (let i = 0; i < this.cars.length; i++) {
-     if (this.brands.filter(el => {
-       return (el._id === this.cars[i].brand._id);
+   for (let i = 0; i < this.articles.length; i++) {
+     if (this.categorys.filter(el => {
+       return (el._id === this.articles[i].category._id);
       }).length <= 0) {
-        this.brands.push(this.cars[i].brand);
+        this.categorys.push(this.articles[i].category);
       }
     }
-    console.log('brands: ', this.brands);
+    console.log('categorys: ', this.categorys);
   }
 
-  changeModels(event) {
-    const brand = event.target.value;
-    console.log(brand);
-    this.modelService.getAll({ brand })
+  changeSubcategories(event) {
+    const category = event.target.value;
+    console.log(category);
+    this.subcategoryService.getAll({ category })
       .then(res => {
-        this.models = res;
-        console.log(this.models);
+        this.subcategorys = res;
+        console.log(this.subcategorys);
       })
       .catch(err => console.log(err));
   }
@@ -172,8 +172,8 @@ getYears () {
     // }
 
     this.filters.new = this.new;
-    this.filters.brand = this.brandSelected;
-    this.filters.model = this.modelSelected;
+    this.filters.category = this.categorySelected;
+    this.filters.subcategory = this.subcategorySelected;
     this.filters.year = this.yearSelected;
     for (const key in this.filters) {
 
@@ -182,10 +182,10 @@ getYears () {
       }
     }
     console.log('this.filters ', this.filters);
-    this.carService.getAllSorted(this.filters, null, { timestamp: 1 }, ['brand', 'model'])
+    this.carService.getAllSorted(this.filters, null, { timestamp: 1 }, ['category', 'subcategory'])
       .then(res => {
-        this.carsFiltered = res;
-        console.log('this.carsFiltered: ', this.carsFiltered);
+        this.articlesFiltered = res;
+        console.log('this.articlesFiltered: ', this.articlesFiltered);
       });
     this.modalRef.hide();
   }
@@ -198,8 +198,8 @@ getYears () {
       ['new', this.filters.new === 'true' ? '0km' : 'Usados'],
       ['opportunity', 'Oportunidad'],
       ['newest', 'Novedad'],
-      ['model', 'Modelo'],
-      ['brand', 'Marca']];
+      ['subcategory', 'Subcategoryo'],
+      ['category', 'Marca']];
      const miMapa = new Map(nombres);
 
      return miMapa.get(item);

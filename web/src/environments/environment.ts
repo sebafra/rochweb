@@ -5,10 +5,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'http://sd-1060583-h00007.ferozo.net:3077/api',
-  imagesUrl: 'http://sd-1060583-h00007.ferozo.net:3077/files'
-  //serverUrl: 'http://localhost:3077/api',
-  //imagesUrl: 'http://localhost:3077/files'
-  // serverUrl: 'http://172.20.16.122:3077/api',
-  // imagesUrl: 'http://172.20.16.122:3077/files'
+  // serverUrl: 'http://sd-1060583-h00007.ferozo.net:3100/api',
+  // imagesUrl: 'http://sd-1060583-h00007.ferozo.net:3100/files'
+  serverUrl: 'http://localhost:3100/api',
+  imagesUrl: 'http://localhost:3100/files'
 };
