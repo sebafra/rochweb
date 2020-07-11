@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
             }else {
               alert('Error al iniciar Sesion, usuario o contraseña incorrecta')
             }
-
           })
+        .catch(e => {
+          alert('Error al iniciar Sesion, usuario o contraseña incorrecta')
+        })
   }
 }

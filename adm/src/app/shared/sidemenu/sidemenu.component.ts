@@ -20,8 +20,11 @@ export class SidemenuComponent implements OnInit {
     private router: Router,
     private storeService: StoreService
   ) {
-    this.isAdmin = this.storeService.isAdmin();
-    this.isLoggedIn = this.storeService.isLoggedIn();
+    //this.isAdmin = this.storeService.isAdmin();
+    //this.isLoggedIn = this.storeService.isLoggedIn();
+    this.storeService.currentAdmin.subscribe(data => this.isAdmin = data);
+    this.storeService.isLoggedIn.subscribe(data => this.isLoggedIn = data);
+    console.log("------ isLoggedIn in Sidemenu ---------", this.isLoggedIn);
   }
 
   ngOnInit() {
