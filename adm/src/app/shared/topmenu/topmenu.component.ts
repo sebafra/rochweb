@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./topmenu.component.sass']
 })
 export class TopmenuComponent implements OnInit {
-  is_admin_login: boolean = Constants.IS_ADMIN_LOGIN;
+  // is_admin_login: boolean = Constants.IS_ADMIN_LOGIN;
   app_version: string = Constants.APP_VERSION;
   app_title: string = Constants.APP_NAME;
   constructor(
@@ -18,13 +18,6 @@ export class TopmenuComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-  logout() {
-    var self = this;
-    Constants.IS_ADMIN_LOGIN = false;
-    setTimeout(function(){
-      self.router.navigate(['/login']);
-    }, 500);
   }
 
 }

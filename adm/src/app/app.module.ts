@@ -51,7 +51,7 @@ const routes: Routes = [
   { path: 'banner/:id', component: BannerComponent, canActivate: [StoreService] },
   { path: 'articles', component: ArticlesComponent, canActivate: [StoreService] },
   { path: 'article/:id', component: ArticleComponent, canActivate: [StoreService] },
-  { path: 'register', component: RegisterComponent},
+  { path: 'register/:id', component: RegisterComponent},
   { path: 'login', component: LoginComponent}
 ]
 

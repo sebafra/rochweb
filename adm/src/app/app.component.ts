@@ -9,7 +9,7 @@ import { ToastsManager } from '../../node_modules/ng2-toastr';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  title = 'Montrer';
+  title = 'Rochman';
   innerHeight: number;
   public viewContainerRef: ViewContainerRef;
 
