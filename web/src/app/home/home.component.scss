@@ -120,11 +120,30 @@ slide {
 
         .search-form {
             form {
-                justify-content: flex-end;
+                justify-content: center;
                 position: relative;
 
                 .input-group {
-                    width: 100%;
+                    //width: 100%;
+
+                    &:first-child {
+                        width: 35%;
+                    }
+
+                    &:last-child {
+                        width: 55%;
+                    }
+
+                    @media screen and (max-width: 400px) {
+                        &:first-child {
+                            width: 100%;
+                            margin-right: 0!important;
+                        }
+
+                        &:last-child {
+                            width: 100%;
+                        }
+                    }
 
                     .form-control {
                         border-radius: 30px;

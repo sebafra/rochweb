@@ -6,6 +6,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Constants } from '../app.constants';
 
+declare const google: any;
+
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -62,19 +64,11 @@ export class ArticleComponent implements OnInit {
         this.article = res[0];
         console.log(this.article);
         this.imageSelected = this.article.images[0];
+        this.loadMap();
+        this.twitter = encodeURI(`https://twitter.com/intent/tweet/?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
+        this.whatsapp = encodeURI(`https://api.whatsapp.com/send?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
         //return this.articleService.getAllSorted({ opportunity: true }, 3, { timestamp: 1 }, [{ "path": "subcategory", "populate": { "path": "category" } }]);
       })
-      .then(
-        result => {
-          this.articles = result;
-          // tslint:disable-next-line:max-line-length
-          this.twitter = encodeURI(`https://twitter.com/intent/tweet/?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
-          // tslint:disable-next-line:max-line-length
-          this.whatsapp = encodeURI(`https://api.whatsapp.com/send?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
-          console.log(this.twitter);
-
-        }
-      )
       .catch(err => console.log(err));
   }
 
@@ -113,6 +107,34 @@ export class ArticleComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  loadMap() {
+    let map;
+    let marker;
+    const DALLAS = { lat: 32.7767, lng: -96.7970 };
+    let location = { lat: this.article.user.location.coordinates[1], lng: this.article.user.location.coordinates[0] };
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: location,
+      zoom: 10,
+      mapTypeId: 'roadmap',
+      maxZoom: 10,
+      disableDefaultUI: true
+    });
+
+    marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: 'Hello World!',
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 50,
+        fillColor: "#F00",
+        fillOpacity: 0.4,
+        strokeWeight: 0.4
+      },
+    });
   }
 
 }

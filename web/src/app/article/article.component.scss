@@ -84,6 +84,7 @@
     dd {
         color: $mediumgray;
     }
+
     dl {
         margin-bottom: 0;
     }
@@ -115,15 +116,22 @@
     }
 }
 
+#map {
+    height: 300px;
+    width: 100%;
+}
+
 //Form Validation
 form {
-  .ng-invalid.ng-touched { //.is-invalid
-    border: 1px solid red
-  }
-  .ng-valid.ng-touched {
-    border: 1px solid green
-  }
-  .invalid-feedback {
-    color: red
-  }
+    .ng-invalid.ng-touched { //.is-invalid
+        border: 1px solid red;
+    }
+
+    .ng-valid.ng-touched {
+        border: 1px solid green;
+    }
+
+    .invalid-feedback {
+        color: red;
+    }
 }

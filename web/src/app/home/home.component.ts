@@ -5,6 +5,8 @@ import { BannerService } from '../services/banner.service';
 import { ArticleService } from '../services/article.service';
 import { Router } from '@angular/router';
 import { ArticleComponent } from '../article/article.component';
+import { SubcategoryService } from '../services/subcategory.service';
+import { CategoryService } from '../services/category.service';
 
 declare var Pixlee: any;
 
@@ -12,7 +14,7 @@ declare var Pixlee: any;
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [BannerService, ArticleService]
+  providers: [BannerService, ArticleService, SubcategoryService, CategoryService]
 })
 export class HomeComponent implements OnInit {
   articles: any = [];
@@ -20,12 +22,17 @@ export class HomeComponent implements OnInit {
   loader: any = './assets/img/loader.gif';
   offset: 100;
   banners: any = [];
+  subcategories: any = [];
+  categories: any = [];
   searchResult: any = [];
+  filters: any = {};
 
   constructor(
     // private noticiaService: NoticiaService,
     private bannerService: BannerService,
     private articleService: ArticleService,
+    private subcategoryService: SubcategoryService,
+    private categoryService: CategoryService,
     private router: Router
   ) { }
 
@@ -33,6 +40,7 @@ export class HomeComponent implements OnInit {
     this.loadArticles();
     this.loadBanner();
     //this.showWidget();
+    this.loadCategories();
   }
 
   loadBanner() {
@@ -44,9 +52,25 @@ export class HomeComponent implements OnInit {
   }
 
   loadArticles() {
-    this.articleService.getAllSorted({}, 9, { timestamp: 1 }, [{"path": "subcategory", "populate": { "path": "category" }}]).then(
+    this.articleService.getAllSorted(this.filters, 100, { timestamp: 1 }, [{"path": "subcategory", "populate": { "path": "category" }}]).then(
       result => {
         this.articles = result;
+      }
+    );
+  }
+  loadSubcategories() {
+    this.subcategoryService.getAllSorted({}, 100, {}, [{"path": "category"}]).then(
+      result => {
+        this.subcategories = result;
+        console.log("Subcategories: ",this.subcategories)
+      }
+    );
+  }
+  loadCategories() {
+    this.categoryService.getAllSorted({}, 100, {}, []).then(
+      result => {
+        this.categories = result;
+        console.log("categories: ",this.categories)
       }
     );
   }
@@ -69,8 +93,21 @@ export class HomeComponent implements OnInit {
 
   }
 
+  search(event){
+    const value = event.target.value.trim();
+    if (value === '') {
+      this.filters.name = [];
+      return;
+    } else { 
+      this.filters.name = value;
+    }
+    this.loadArticles();
+    console.log('value: ', value);
 
-  search(event) {
+  }
+
+
+  searchOld(event) {
     const value = event.target.value.trim();
     if (value === '') {
       this.searchResult = [];
