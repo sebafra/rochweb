@@ -115,7 +115,55 @@ module.exports = {
 
   },
 
-  upload: (req, res, next, cb) => {
+  upload: function (req, res) {
+
+    let prefix = '';
+    if (req.originalUrl) {
+      let p = req.originalUrl.split('/');
+      if (p.length >= 3) {
+        prefix = p[1] + '_';
+      }
+    }
+    debug('upload - file')
+
+    const _self = this;
+    if (req.files && req.files.file) {
+      let file = req.files.file;
+      debug('upload - file:', file)
+      let tmp = file.type.split('/');
+      debug('upload - tmp:', tmp)
+      if (tmp.length == 2 && tmp[0] == 'image') {
+        let newFileName = prefix + uuid.v4() + '.' + tmp[1];
+        debug('upload - newFileName:', newFileName)
+        fs.rename(file.path, req.settings.imagesDir + newFileName, function (err) {
+          if (err) {
+            return res.status(400).send({ errors: _self.formatErrors(err) });
+          } else {
+            const Jimp = require("jimp")
+
+            Jimp.read(req.settings.imagesDir + newFileName).then(function (lenna) {
+              // lenna.resize(256, 256)            // resize
+              lenna.scaleToFit(256, 256)            // resize
+                .quality(60)                 // set JPEG quality
+                //           .greyscale()                 // set greyscale
+                .write(req.settings.imagesDir + "small-" + newFileName); // save
+
+              return res.status(200).send({ file: newFileName })
+            }).catch(function (err) {
+              console.error("err:" + err);
+              return res.status(400).send({ errors: 'No se puede generar el archivo chico' });
+            })
+          }
+        })
+      } else {
+        return res.status(400).send({ errors: 'No image files uploaded' });
+      }
+    } else {
+      return res.status(400).send({ errors: 'No file uploaded' });
+    }
+  },
+
+  uploadNoSmall: (req, res, next, cb) => {
 
     let prefix = '';
     if (req.originalUrl) {

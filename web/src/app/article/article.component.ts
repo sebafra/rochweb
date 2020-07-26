@@ -57,21 +57,20 @@ export class ArticleComponent implements OnInit {
   console.log( this.formObject);
   }
   loadArticles(_id) {
-    // TODO: No debe estar el vehiculo que muestra esta vista en la lista
-    this.articleService.getAllSorted({ _id }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" } }])
+    this.articleService.getAllSorted({ _id }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" }},'user'])
       .then(res => {
         this.article = res[0];
         console.log(this.article);
         this.imageSelected = this.article.images[0];
-        return this.articleService.getAllSorted({ opportunity: true }, 3, { timestamp: 1 }, [{ "path": "subcategory", "populate": { "path": "category" } }]);
+        //return this.articleService.getAllSorted({ opportunity: true }, 3, { timestamp: 1 }, [{ "path": "subcategory", "populate": { "path": "category" } }]);
       })
       .then(
         result => {
           this.articles = result;
           // tslint:disable-next-line:max-line-length
-          this.twitter = encodeURI(`https://twitter.com/intent/tweet/?text=Te comparto ${this.article.category.name} ${this.article.subcategory.name} de ${this.href}`);
+          this.twitter = encodeURI(`https://twitter.com/intent/tweet/?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
           // tslint:disable-next-line:max-line-length
-          this.whatsapp = encodeURI(`https://api.whatsapp.com/send?text=Te comparto ${this.article.category.name} ${this.article.subcategory.name} de ${this.href}`);
+          this.whatsapp = encodeURI(`https://api.whatsapp.com/send?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
           console.log(this.twitter);
 
         }

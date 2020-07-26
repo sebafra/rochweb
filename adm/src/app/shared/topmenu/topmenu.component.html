@@ -2,7 +2,8 @@
   <div class="col-6">
     <h4><a href="" class="nav-link text-primary">{{app_title}} <small> v{{app_version}}</small></a></h4>
   </div>
-  <div class="col-6" style="text-align:right">
-    <a *ngIf="is_admin_login" class="nav-link" (click)="logout()"><i class="fa fa-sign-out"></i> Cerrar Sesión</a>
+  <div *ngIf="user" class="col-6" style="text-align:right">
+    <a class="nav-link d-inline" (click)="showProfile()"><i class="fa fa-user"></i> {{user?.firstName}} {{user?.lastName}} </a> |
+    <a class="nav-link d-inline" (click)="logout()"><i class="fa fa-sign-out"></i> Salir</a>
   </div>
 </div>

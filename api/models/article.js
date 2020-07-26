@@ -11,7 +11,7 @@ const articleSchema = new Schema(
         user: { type: Schema.Types.ObjectId, ref: 'user' },
         images: [{ type: String }],
         enabled: { type: Boolean, default: false },
-        condition: { type: String }
+        condition: { type: String } // 0: Nuevo , 1: Usado
     },
     {
         timestamps: true

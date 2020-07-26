@@ -35,17 +35,18 @@
           <div class="col-sm-6">
             <dl>
               <dt><i class="fa fa-car text-danger"></i> Condición</dt>
-              <dd>{{article?.condition}}</dd>
-              <dt><i class="fa fa-fire text-danger"></i> Combustible</dt>
-              <dd>{{article?.fuel | uppercase}}</dd>
+              <dd *ngIf="article?.condition == '0'">Nuevo</dd>
+              <dd *ngIf="article?.condition == '1'">Usado</dd>
+              <!-- <dt><i class="fa fa-fire text-danger"></i> Combustible</dt>
+              <dd>{{article?.fuel | uppercase}}</dd> -->
             </dl>
           </div>
           <div class="col-sm-6">
             <dl>
-              <dt><i class="fa fa-calendar text-danger"></i> Año</dt>
-              <dd>{{article?.year}}</dd>
-              <dt><i class="fa fa-dashboard text-danger"></i> Kilometraje</dt>
-              <dd>{{article?.km ? article?.km : '__' }}</dd>
+              <dt><i class="fa fa-calendar text-danger"></i> Publicado</dt>
+              <dd>{{article?.updatedAt | date: 'dd/MM/yy HH:mm'}}</dd>
+              <!-- <dt><i class="fa fa-dashboard text-danger"></i> Kilometraje</dt>
+              <dd>{{article?.km ? article?.km : '__' }}</dd> -->
             </dl>
           </div>
           <div class="col-sm-6"></div>
@@ -54,9 +55,12 @@
       <div class="detail-container price-block">
         <div class="row no-gutters">
           <div class="row col-sm-6 no-gutters">
-            <div *ngIf="article?.advance > 0" class="finance-container">
-              Anticipo de {{article?.advance}}
+            <div class="finance-container">
+              Precio
             </div>
+            <!-- <div *ngIf="article?.advance > 0" class="finance-container">
+              Anticipo de {{article?.advance}}
+            </div> -->
           </div>
           <div class="col-sm-6 price-container">
             <!-- <span *ngIf="article?.price_discount" class="text-danger">${{article?.price_discount}}</span> -->
@@ -64,24 +68,38 @@
           </div>
         </div>
       </div>
-      <div class="detail-container">
-        <button type="button" class="btn btn-primary default btn-block" (click)="openModal(consult)">CONSULTAR</button>
+      <div class="detail-container specs-block">
+        <div class="row no-gutters">
+          <div class="col-sm-6">
+            <dl>
+              <dt><i class="fa fa-user text-danger"></i> Usuario</dt>
+              <dd>{{article?.user?.user}}</dd>
+            </dl>
+          </div>
+          <div class="col-sm-6">
+            <dl>
+              <dt><i class="fa fa-phone text-danger"></i> Celular</dt>
+              <dd>{{article?.user?.celular}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
+      <!-- <div class="detail-container">
+        <button type="button" class="btn btn-primary default btn-block" (click)="openModal(consult)">CONSULTAR</button>
+      </div> -->
       <div class="detail-container social-block">
         <div class="row">
           <div class="col-6">Compartir en redes</div>
           <div class="col-6 text-right">
-              <a class="resp-sharing-button__link" [href]="'https://facebook.com/sharer/sharer.php?u=' + href" target="_blank"
-                aria-label="">
+            <a class="resp-sharing-button__link" [href]="'https://facebook.com/sharer/sharer.php?u=' + href"
+              target="_blank" aria-label="">
               <i class="fa fa-facebook fa-2x ml-2 text-secondary" aria-hidden="true"></i>
             </a>
-            <a class="resp-sharing-button__link" [href]="twitter"
-              target="_blank" aria-label="">
+            <a class="resp-sharing-button__link" [href]="twitter" target="_blank" aria-label="">
               <i class="fa fa-twitter fa-2x ml-2 text-secondary" aria-hidden="true"></i>
             </a>
-            <a class="resp-sharing-button__link" [href]="whatsapp" target="_blank"
-              aria-label="">
-                <i class="fa fa-whatsapp fa-2x ml-2 text-secondary" aria-hidden="true"></i>
+            <a class="resp-sharing-button__link" [href]="whatsapp" target="_blank" aria-label="">
+              <i class="fa fa-whatsapp fa-2x ml-2 text-secondary" aria-hidden="true"></i>
             </a>
           </div>
         </div>
@@ -145,8 +163,10 @@
       <div class="row card-list">
         <div *ngFor="let item of cars" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
           <div class="card mb-2 car-card">
-            <img class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]" [offset]="offset">
-            <button *ngIf="item.opportunity" type="button" class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
+            <img class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]"
+              [offset]="offset">
+            <button *ngIf="item.opportunity" type="button"
+              class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
             <button *ngIf="item.newest" type="button" class="btn btn-warning btn-sm new-label">NOVEDAD</button>
             <button *ngIf="item.year" class="btn btn-light btn-sm year-label">{{item.year}}</button>
             <div class="card-block p-3">
@@ -186,21 +206,25 @@
       <div class="form-group">
         <label>Apellido</label>
         <input type="text" class="form-control" formControlName="lastname" placeholder="Ingrese su Apellido">
-        <div *ngIf="!formObject.controls['lastname'].valid && formObject.controls['lastname'].touched" class="invalid-feedback">
-          debe ingresar su  
+        <div *ngIf="!formObject.controls['lastname'].valid && formObject.controls['lastname'].touched"
+          class="invalid-feedback">
+          debe ingresar su
         </div>
       </div>
       <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control" formControlName="email" placeholder="Ingrese su email">
-        <div *ngIf="!formObject.controls['email'].valid && formObject.controls['email'].touched" class="invalid-feedback">
+        <div *ngIf="!formObject.controls['email'].valid && formObject.controls['email'].touched"
+          class="invalid-feedback">
           debe ingresar su Email
         </div>
       </div>
       <div class="form-group">
         <label>Consulta</label>
-        <textarea type="text" class="form-control" placeholder="Ingrese su consulta" formControlName="description" rows="5"></textarea>
-        <div *ngIf="!formObject.controls['description'].valid && formObject.controls['description'].touched" class="invalid-feedback">
+        <textarea type="text" class="form-control" placeholder="Ingrese su consulta" formControlName="description"
+          rows="5"></textarea>
+        <div *ngIf="!formObject.controls['description'].valid && formObject.controls['description'].touched"
+          class="invalid-feedback">
           debe ingresar su Consulta
         </div>
       </div>
@@ -212,7 +236,8 @@
       <div *ngIf="canSend">
         <span *ngIf="loading"> <i class="fa fa-circle-o-notch fa-spin fa-fw text-danger" aria-hidden="true"></i>
           Enviando....</span>
-        <button *ngIf="!loading" class="btn btn-primary default text-right" type="submit" block [disabled]="!formObject.valid">Enviar</button>
+        <button *ngIf="!loading" class="btn btn-primary default text-right" type="submit" block
+          [disabled]="!formObject.valid">Enviar</button>
       </div>
     </div>
   </form>

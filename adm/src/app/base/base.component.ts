@@ -45,11 +45,12 @@ export class BaseComponent implements OnInit {
            return ({ message: 'No autorizado' })
           }
           self.showSuccess('Se ha agregado exitosamente!!');
-          self.router.navigate([self.getBasesURI()]);
+          self.afterSuccessLogForm();
 
         }, function (reason) {
-          console.error(reason);
-          self.showError(reason);
+          let err = reason.json();
+          console.error(err);
+          self.showError(err.message);
         }
       );
     } else {
@@ -58,7 +59,8 @@ export class BaseComponent implements OnInit {
           console.log(response);
           self.showSuccess('Se ha actualizado exitosamente!!');
           setTimeout(() => {
-            self.router.navigate([self.getBasesURI()]);
+            //self.router.navigate([self.getBasesURI()]);
+            self.afterSuccessLogForm();
           }, 500);
 
         }, function (reason) {
@@ -68,6 +70,9 @@ export class BaseComponent implements OnInit {
       );
     }
 
+  }
+  afterSuccessLogForm(){
+    this.router.navigate([this.getBasesURI()]);
   }
 
   showSuccess(message) {

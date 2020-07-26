@@ -8,6 +8,7 @@ import { CategoryService } from '../services/category.service'
 import { BaseComponent } from '../base/base.component';
 import { SubcategoryService } from '../services/subcategory.service';
 import { environment } from 'environments/environment';
+import { Constants } from 'app/app.constants';
 
 @Component({
   selector: 'app-article',
@@ -25,6 +26,7 @@ export class ArticleComponent extends BaseComponent {
   imagesToRemove: any = [];
   categorySelected;
   loading = false;
+  user: any;
 
   constructor(
     public router: Router,
@@ -38,6 +40,7 @@ export class ArticleComponent extends BaseComponent {
   ) {
     super(router, formBuilder, route, toastr, vcr, <BaseService>articleService)
     this.imagesUrl = environment.imagesUrl
+    this.user = Constants.LOGGED_USER;
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
@@ -74,7 +77,7 @@ export class ArticleComponent extends BaseComponent {
       .catch(err => console.log(err))
 
     return this.formBuilder.group({
-      id: [item._id],
+      id: [item.id],
       name: [item.name],
       subcategory: [item.subcategory, Validators.required],
       description: [item.description],
@@ -102,7 +105,7 @@ export class ArticleComponent extends BaseComponent {
   }
 
   logForm(values) {
-    values.user = "5ec1d54d8393fe0c53555cee";
+    values.user = this.user.id;
     values.images = this.images;
     console.log('new', values.new);
 

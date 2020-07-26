@@ -5,7 +5,7 @@
       <h1 class="section-title">
         <i class="fa fa-book"></i> Artículos</h1>
     </div>
-    <div class="col-sm-6 text-right">
+    <div *ngIf="user?.role == 1" class="col-sm-6 text-right">
       <button type="button" class="btn btn-primary ml-2" (click)="create()">
         <i class="fa fa-plus"></i> Nuevo</button>
     </div>
@@ -15,7 +15,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th width="10%">Vista Previa</th>
+          <th width="10%"></th>
             <!-- <th>Marca
             <select class="select" name="brand" id="brand" (change)="changeBrand($event)">
               <option value="null" >Todos</option>
@@ -43,13 +43,21 @@
             <!-- </ng-template> -->
           </td>
           <td>{{ item?.name }}</td>
-          <td>{{ item?.description }}</td>
+          <td>{{ item?.createdAt | date: 'dd/MM/yy HH:mm' }}</td>
           <td>${{ item?.price }}</td>
           <td class="text-right">
+            <div *ngIf="user?.role == 0" class="d-inline">
+              <button *ngIf="!item.enabled" type="button" class="btn btn-default btn-sm" (click)="updateStatus(item)">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+              <button *ngIf="item.enabled" type="button" class="btn btn-danger btn-sm" (click)="updateStatus(item)">
+                <i class="fa fa-close" aria-hidden="true"></i>
+              </button>
+            </div>
             <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="remove(item)">
+            <button *ngIf="user?.role == 1" type="button" class="btn btn-danger btn-sm" (click)="remove(item)">
               <i class="fa fa-close" aria-hidden="true"></i>
             </button>
           </td>

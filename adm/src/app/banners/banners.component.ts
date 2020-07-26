@@ -42,7 +42,7 @@ export class BannersComponent extends BasesComponent {
 
     this.items = this.items.map( item => this.bannerService.update(item).then(res => {
       console.log(res);
-      this.getItems({});
+      this.getItems();
     }
     ))
   }
@@ -58,14 +58,14 @@ export class BannersComponent extends BasesComponent {
 
     this.items = this.items.map( item => this.bannerService.update(item).then(res => {
       console.log(res);
-      this.getItems({});
+      this.getItems();
     }
     ))
   }
 
-  getItems(filters) {
-    this.baseService.getAllSorted(filters, {order: 1}, []).then(items => {
-      this.items = items
-    });
-  }
+  // getItems(filters) {
+  //   this.baseService.getAllSorted(filters, {order: 1}, []).then(items => {
+  //     this.items = items
+  //   });
+  // }
 }

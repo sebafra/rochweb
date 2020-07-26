@@ -63,9 +63,11 @@ export class SubcategoriesComponent extends BasesComponent {
   changeCategory(category) {
     console.log(category.target.value);
     if (category.target.value === -1) {
-      this.getItems({})
+      this.filters = {};
+      this.getItems()
     } else {
-      this.getItems({ category: category.target.value })
+      this.filters = { category: category.target.value };
+      this.getItems()
     }
   }
 

@@ -17,6 +17,9 @@ export class StoreService implements CanActivate {
   private loginSource = new BehaviorSubject<boolean>(false);
   isLoggedIn = this.loginSource.asObservable();
 
+  private user = new BehaviorSubject<any>(undefined);
+  userData = this.user.asObservable();
+
   constructor(private http: Http, private router: Router) {
     this.usersUrl = environment.serverUrl + Constants.API_METHOD_LOGIN
   }
@@ -28,6 +31,10 @@ export class StoreService implements CanActivate {
   changeLogin(loginStatus: boolean) {
     console.log("Show isLoggedIn: ",loginStatus);
     this.loginSource.next(loginStatus);
+  }
+  setUserData(userParams: any) {
+    console.log("Show User: ",userParams);
+    this.user.next(userParams);
   }
 
   signin(values) {
@@ -58,6 +65,7 @@ export class StoreService implements CanActivate {
     localStorage.setItem('token', String(res.token))
     Constants.LOGGED_USER = res.user;
     this.changeLogin(true);
+    this.setUserData(res.user);
     if(res.user.role == 0){
       Constants.IS_ADMIN_LOGIN = true;
       this.changeAdmin(true);
@@ -68,22 +76,32 @@ export class StoreService implements CanActivate {
   logout() {
     //localStorage.clear()
     localStorage.removeItem(Constants.STORAGE.user);
+    localStorage.removeItem('token');
     this.changeLogin(false);
+    this.setUserData(undefined);
     this.router.navigateByUrl('/login')
   }
 
-  checkAuth() {
-    console.log("------------- Check AUTH --------------");
-    let res = localStorage.getItem('token') !== null;
-    console.log("------------- LoggedIn: " + res + " --------------");
-    this.changeLogin(res);
-    if (res) {
-      let user: any = JSON.parse(localStorage.getItem(Constants.STORAGE.user));
+  loadUserData() {
+    let user: any = JSON.parse(localStorage.getItem(Constants.STORAGE.user));
+    console.log("-------- loadUserData --------", user);
+    if(user){
       Constants.LOGGED_USER = user;
+      this.setUserData(user);
       if (user.role == 0) {
         this.changeAdmin(true);
-        console.log("------------- Admin ROLE: " + true + " --------------");
+        console.log("-------- Admin ROLE: true --------");
       }
+    }
+  }
+
+  canActivate() {
+    console.log('can activate')
+    let res = localStorage.getItem('token') !== null
+    if (!res) {
+      this.router.navigate(['login'])
+    } else {
+      this.changeLogin(true);
     }
     return res
   }
@@ -107,9 +125,4 @@ export class StoreService implements CanActivate {
     this.logout()
   }
 
-
-  canActivate() {
-    console.log('can activate')
-    return localStorage.getItem('token') !== null
-  }
 }

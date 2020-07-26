@@ -71,6 +71,9 @@ export class TopmenuComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+  showAdmin(){
+    window.open("http://localhost:4200");
+  }
 
 
  resolved(captchaResponse: string) {

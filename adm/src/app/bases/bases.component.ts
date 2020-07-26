@@ -15,6 +15,7 @@ export class BasesComponent implements OnInit {
   items = [];
   textSearch;
   loading = true;
+  filters: any = {};
 
   getBaseURI() {
     return '';
@@ -44,18 +45,18 @@ export class BasesComponent implements OnInit {
           return this.baseService.deleteFiles([item.image])
         } else {
           this.showSuccess(`se elimino correctamente `)
-          this.getItems({});
+          this.getItems();
         }
       })
       .then(res => {
         if (res) {
           this.showSuccess(`se elimino correctamente `)
-          this.getItems({});
+          this.getItems();
         }
       })
       .catch(err => {
       this.showError(err.message)
-      this.getItems({});
+      this.getItems();
       })
   }
 
@@ -70,25 +71,29 @@ export class BasesComponent implements OnInit {
 
   search() {
     const ts = this.textSearch.trim();
-    let filters: any = {};
+    //let filters: any = {};
     if ( ts !== '') {
-      filters = this.getFiltersSearch(this.textSearch);
+      this.filters = this.getFiltersSearch(this.textSearch);
     }
-    this.getItems(filters);
+    this.getItems();
   }
 
 
   ngOnInit() {
-    this.getItems({});
+    this.getItems();
+  }
+
+  getFilters() {
+    return this.filters;
   }
 
   getPopulates() {
     return [];
   }
 
-  getItems(filters) {
+  getItems() {
     this.loading = true
-    this.baseService.getAllAndPopulate(filters, this.getPopulates()).then(items => {
+    this.baseService.getAllAndPopulate(this.getFilters(), this.getPopulates()).then(items => {
       this.items = items;
       this.getItemSuccess();
       this.loading = false

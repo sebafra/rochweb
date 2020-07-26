@@ -7,6 +7,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { BasesComponent } from '../bases/bases.component';
 import { environment } from 'environments/environment';
 import { CategoryService } from '../services/category.service';
+import { Constants } from 'app/app.constants';
 
 @Component({
   selector: 'app-articles',
@@ -19,6 +20,7 @@ imagesUrl: String
 category = [];
 categorySelected: any =  'null';
 typeSelected: any;
+user: any;
   constructor(
     public router: Router,
     public articleService: ArticleService,
@@ -28,8 +30,15 @@ typeSelected: any;
   ) {
     super(router, <BaseService>articleService, toastr, vcr)
     this.imagesUrl = environment.imagesUrl
+    this.user = Constants.LOGGED_USER;
   }
 
+  ngOnInit(){
+    if(this.user.role == 1){
+      this.filters.user = this.user.id;
+    }
+    super.ngOnInit();
+  }
   getBaseURI() {
     return '/article';
   }
@@ -38,6 +47,9 @@ typeSelected: any;
     return ['category', 'model']
   }
 
+  getFilters() {
+    return this.filters;
+  }
 
 
   getItemSuccess() {
@@ -67,6 +79,18 @@ typeSelected: any;
       this.ArticlesFiltered()
    }
 
+   updateStatus(item) {
+     if (item.enabled) {
+      item.enabled = false;
+     } else {
+      item.enabled = true;
+     }
+     this.baseService.update(item).then(res => {
+       console.log("Updated Status", res);
+     })
+     this.getItems();
+   }
+
 
     // filtra por parametros pasados es reutilizable
   ArticlesFiltered() {
@@ -82,7 +106,8 @@ typeSelected: any;
     if (this.categorySelected !== 'null') {
      params.category = this.categorySelected;
     }
-    this.getItems(params);
+    this.filters = params;
+    this.getItems();
   }
 
 }
