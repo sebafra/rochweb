@@ -4,13 +4,12 @@
       <div class="col-sm-2 filter-buttons">
         <button (click)="openModal(template)" type="button" class="btn btn-default btn-white outline"><i class="fa fa-filter"
             aria-hidden="true"></i>
-          <span class="d-none d-md-inline">Fitrar vehículos</span> </button>
+          <span class="d-none d-md-inline">Fitrar</span> </button>
       </div>
       <div class="col-sm-10 search-form">
         <form class="form-inline">
           <div class="input-group mb-md-3">
-            <input type="text" class="form-control" (keyup)="search($event)" placeholder="Buscá por marca o modelo" aria-label="Buscá por marca o modelo"
-              aria-describedby="button-addon2">
+            <input type="text" class="form-control" [(ngModel)]="textSearch" (keyup.enter)="loadArticles()" placeholder="Buscá por nombre" [ngModelOptions]="{standalone: true}">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary"  type="button" id="button-addon2"><i class="fa fa-search"></i></button>
             </div>
@@ -26,22 +25,23 @@
   </div>
   <div *ngIf="objectKeys(filters).length > 0" class="texto-central-secundario">
     <div class="container">
-      <button *ngIf="objectKeys(filters).length > 0" (click)="deleteFilters(); loadCars()"  type="button" class="btn btn-outline">X Limpiar filtros</button>
-      <button *ngFor="let item of objectKeys(filters)" (click)="deleteFilter(item); loadCars()" type="button" class="btn btn-sm btn-outline-dark"> <i class="fa fa-times-circle" aria-hidden="true"></i> {{names(item)}}</button>
+      <button *ngIf="objectKeys(filters).length > 0" (click)="deleteFilters()"  type="button" class="btn btn-outline">x Limpiar filtros</button>
+      <button *ngFor="let item of filters | keyvalue" type="button" class="btn btn-sm btn-outline-dark">{{getName(item)}}</button>
   </div>
   </div>
 </div>
 <div *ngIf="!loader" class="container pt-2">
   <div class="featured-cars">
     <div class="row card-list">
-      <div *ngFor="let item of carsFiltered" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
+      <div *ngFor="let item of articles" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
         <div class="card mb-2 car-card">
           <img class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]" [offset]="offset">
           <button *ngIf="item.opportunity" type="button" class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
           <button *ngIf="item.newest" type="button" class="btn btn-warning btn-sm new-label">NOVEDAD</button>
           <button *ngIf="item.year" class="btn btn-light btn-sm year-label">{{item.year}}</button>
           <div class="card-block p-3">
-            <h4 class="card-title">{{ item.brand?.name }} {{ item.model?.name }}</h4>
+            <h4 class="card-title">{{ item?.name }}</h4>
+            <div class="card-text">{{ item?.subcategory?.category?.name }} {{ item?.subcategory?.name }}</div>
             <div class="card-text" [innerHtml]="item.description | truncate:80"></div>
           </div>
           <div class="card-footer">
@@ -75,41 +75,26 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Seleccionar Tipo </label>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" name="tipo" type="radio" id="inlineCheckbox3" [(ngModel)]="new" value="">
-        <label class="form-check-label" for="inlineCheckbox3">Todos</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="tipo"  id="inlineCheckbox1" [(ngModel)]="new" value="true">
-        <label class="form-check-label"  for="inlineCheckbox1">0Km</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" name="tipo" type="radio" id="inlineCheckbox2" [(ngModel)]="new" value="false">
-        <label class="form-check-label" for="inlineCheckbox2">Usados</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Filtrar por Marca</label>
-      <select class="form-control" [(ngModel)]="brandSelected" (change)="changeModels($event)">
-        <option value="">Todas</option>
-        <option *ngFor="let item of brands" [value]="item._id" >{{item.name}}</option>
+      <label >Filtrar por Categoría</label>
+      <select class="form-control" [(ngModel)]="categorySelected" (change)="changeCategory($event)">
+        <option value="all">Todas</option>
+        <option *ngFor="let item of categories" [value]="item.id" >{{item.name}}</option>
       </select>
     </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Filtrar por Modelo</label>
-      <select class="form-control" [(ngModel)]="modelSelected">
-        <option value="">Todos</option>
-        <option *ngFor="let item of models" [value]="item._id">{{item.name}}</option>
+      <label >Filtrar por Subcategoría</label>
+      <select class="form-control" [(ngModel)]="subcategorySelected">
+        <option value="all">Todos</option>
+        <option *ngFor="let item of subcategories" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="exampleFormControlSelect1">Filtrar por Año</label>
       <select class="form-control" [(ngModel)]="yearSelected">
         <option value="">Todos</option>
         <option *ngFor="let item of years" [value]="item">{{item}}</option>
       </select>
-    </div>
+    </div> -->
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary default" (click)="filterByModal()">FILTRAR</button>

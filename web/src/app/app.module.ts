@@ -20,6 +20,7 @@ import { ArticleComponent } from './article/article.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ToastModule } from 'ng2-toastr';
 import { BusinessComponent } from './business/business.component';
+import { KeyvaluePipe } from './pipes/keyvalue.pipe';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -38,7 +39,8 @@ const routes: Routes = [
     TruncatePipe,
     CatalogComponent,
     ArticleComponent,
-    BusinessComponent
+    BusinessComponent,
+    KeyvaluePipe
   ],
   imports: [
     BrowserModule, HttpModule, LazyLoadImageModule,

@@ -31,14 +31,13 @@ export class CategoryComponent extends BaseComponent {
 
   getFormNew() {
     return this.formBuilder.group({
-      id: [null],
       name: [null, Validators.required]
     })
   }
 
   getFormEdit(item) {
     return this.formBuilder.group({
-      id: [item._id],
+      id: [item.id],
       name: [item.name, Validators.required]
     })
   }

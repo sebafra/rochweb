@@ -59,6 +59,7 @@ export class ArticleComponent extends BaseComponent {
     return this.formBuilder.group({
       name: [null],
       subcategory: [null],
+      category: [null],
       description: [null],
       images: [null],
       price: [null],
@@ -79,6 +80,7 @@ export class ArticleComponent extends BaseComponent {
     return this.formBuilder.group({
       id: [item.id],
       name: [item.name],
+      category: [item.category, Validators.required],
       subcategory: [item.subcategory, Validators.required],
       description: [item.description],
       images: [item.images],

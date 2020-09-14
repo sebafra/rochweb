@@ -12,7 +12,7 @@ export class BannerService extends BaseService {
 
   createImage(file): Promise<any> {
 
-    const URL = environment.serverUrl + Constants.API_METHOD_BANNERS + Constants.API_FILE_UPLOAD;
+    const URL = environment.serverUrl + Constants.API_FILE_UPLOAD;
 
     const fd = new FormData();
     fd.append('file', file);

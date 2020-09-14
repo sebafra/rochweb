@@ -39,10 +39,10 @@ export class BannerComponent extends BaseComponent {
 
   getFormNew() {
     return this.formBuilder.group({
-      id: [null],
       image: [null, Validators.required],
       title: [null, Validators.required],
       subtitle: [null],
+      link: [null],
       order: [null]
     })
   }
@@ -50,10 +50,11 @@ export class BannerComponent extends BaseComponent {
   getFormEdit(item) {
     console.log(item)
     const formObject = this.formBuilder.group({
-      id: [item._id],
+      id: [item.id],
       image: [item.image, Validators.required],
       title: [item.title, Validators.required],
       subtitle: [item.subtitle],
+      link: [item.link],
       order: [item.order]
     })
     this.image = formObject.controls['image'].value
@@ -68,7 +69,7 @@ export class BannerComponent extends BaseComponent {
     console.log('el archivo es: ', this.file);
     this.bannerService.createImage(this.file).then(data => {
       console.log('data recibida del service createImage', JSON.stringify(data));
-      this.image = data.image
+      this.image = data.file
     })
   }
 

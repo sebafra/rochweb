@@ -2,10 +2,11 @@ import mongoose, { Schema } from 'mongoose'
 
 const bannerSchema = new Schema(
     {
-        id: { type: String },
-        name: { type: String },
+        title: { type: String },
+        subtitle: { type: String },
         image: { type: String },
-        link: { type: String }
+        link: { type: String },
+        order: { type: Number }
     },
     {
         timestamps: true

@@ -87,8 +87,8 @@ user: any;
      }
      this.baseService.update(item).then(res => {
        console.log("Updated Status", res);
+       this.getItems();
      })
-     this.getItems();
    }
 
 

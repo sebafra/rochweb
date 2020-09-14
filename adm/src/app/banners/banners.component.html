@@ -16,7 +16,7 @@
         <tr>
           <th width="10%">Imagen</th>
           <th >Titulo</th>
-          <th width="15%" class="text-center">Orden</th>
+          <!-- <th width="15%" class="text-center">Orden</th> -->
           <th width="15%"></th>
         </tr>
       </thead>
@@ -26,14 +26,14 @@
            <img [src]="imagesUrl + '/' + item.image" alt="" class="img-fluid">
           </td>
           <td>{{ item.title }}</td>
-          <td class="text-center">
-            <button *ngIf="item.order !== items.length" type="button" class="btn btn-info btn-sm" (click)="incrementOrder(item)">
+          <!-- <td class="text-center">
+            <button [disabled]="items.length == 1" *ngIf="item.order !== items.length" type="button" class="btn btn-info btn-sm" (click)="incrementOrder(item)">
               <i class="fa fa-arrow-down" aria-hidden="true"></i>
             </button>
-            <button *ngIf="item.order > 1" type="button" class="btn btn-info btn-sm" (click)="decrementOrder(item)">
+            <button [disabled]="items.length == 1" *ngIf="item.order > 1" type="button" class="btn btn-info btn-sm" (click)="decrementOrder(item)">
               <i class="fa fa-arrow-up" aria-hidden="true"></i>
             </button>
-          </td>
+          </td> -->
           <td class="text-right">
             
             <button type="button" class="btn btn-primary btn-sm" (click)="edit(item)">

@@ -15,7 +15,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="category">Categoría</label>
-        <select class="form-control" id="category" (change)="changeCategory($event)">
+        <select class="form-control" id="category" formControlName="category" (change)="changeCategory($event)">
           <option value="" disabled selected>Seleccione una Categoría</option>
           <option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</option>
         </select>

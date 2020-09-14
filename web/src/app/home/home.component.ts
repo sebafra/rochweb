@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   banners: any = [];
   subcategories: any = [];
   categories: any = [];
+  categorySelected: any = "all";
   searchResult: any = [];
   filters: any = {};
 
@@ -96,6 +97,20 @@ export class HomeComponent implements OnInit {
   search(event){
     const value = event.target.value.trim();
     if (value === '') {
+      return;
+    } else {
+      let filters: any = {};
+      filters.name = value;
+      if(this.categorySelected != "all"){
+        filters.category = this.categorySelected;
+      }
+      console.log("Filters to send: ", filters);
+      this.router.navigate(['catalog/', filters]);
+    }
+  }
+  searchAlt(event){
+    const value = event.target.value.trim();
+    if (value === '') {
       this.filters.name = [];
       return;
     } else { 
@@ -103,7 +118,6 @@ export class HomeComponent implements OnInit {
     }
     this.loadArticles();
     console.log('value: ', value);
-
   }
 
 
