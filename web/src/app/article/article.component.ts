@@ -30,6 +30,8 @@ export class ArticleComponent implements OnInit {
   twitter: any;
   whatsapp: any;
   recaptcha_key = Constants.RECAPTCHA_SITE_KEY;
+  related: any = [];
+  showCell: Boolean = false;
 
   constructor(
     private articleService: ArticleService,
@@ -47,7 +49,7 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
       this.loadArticles(this.article_id);
       //TODO
-      const url = `http://www.montrer.com.ar/article/${this.article_id}`;
+      const url = `http://www.rochmankambalache.com/article/${this.article_id}`;
       this.href = encodeURI(url);
 
       this.formObject = this.formBuilder.group({
@@ -68,6 +70,16 @@ export class ArticleComponent implements OnInit {
         this.twitter = encodeURI(`https://twitter.com/intent/tweet/?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
         this.whatsapp = encodeURI(`https://api.whatsapp.com/send?text=Te comparto ${this.article.subcategory.category.name} ${this.article.subcategory.name} de ${this.href}`);
         //return this.articleService.getAllSorted({ opportunity: true }, 3, { timestamp: 1 }, [{ "path": "subcategory", "populate": { "path": "category" } }]);
+        this.getRelated(this.article.category)
+      })
+      .catch(err => console.log(err));
+  }
+  getRelated(category){
+    this.articleService.getAllSorted({ category,_id:{$ne:this.article.id} }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" } }, 'user'])
+      .then(res => {
+        for (let index = 0; index < 3; index++) {
+          this.related.push(res[index]);
+        }
       })
       .catch(err => console.log(err));
   }
@@ -78,6 +90,9 @@ export class ArticleComponent implements OnInit {
 
   showArticle(item) {
     this.router.navigate(['/article', item.id]);
+  }
+  goToCategory(category){
+    this.router.navigate(['catalog/', {category: category}]);
   }
 
 

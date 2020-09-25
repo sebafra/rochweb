@@ -7,7 +7,7 @@
     </div>
     <div *ngIf="user?.role == 1" class="col-sm-6 text-right">
       <button type="button" class="btn btn-primary ml-2" (click)="create()">
-        <i class="fa fa-plus"></i> Nuevo</button>
+        <i class="fa fa-plus"></i> Publicar Artículo</button>
     </div>
   </div>
 
@@ -36,6 +36,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr *ngIf="items.length == 0">
+          <td colspan="4" class="">No tienes artículos todavía</td>
+        </tr>
         <tr *ngFor="let item of items">
           <td> 
             <!-- <ng-template *ngIf="item.images.length > 0"> -->

@@ -72,7 +72,8 @@ export class TopmenuComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
   showAdmin(){
-    window.open("http://localhost:4200");
+    window.open("http://vps-1060583-x.dattaweb.com:3100/adm");
+    //window.open("http://localhost:3100/adm");
   }
 
 

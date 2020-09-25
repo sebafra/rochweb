@@ -80,12 +80,14 @@ user: any;
    }
 
    updateStatus(item) {
+     let obj: any = {};
+     obj.id = item.id;
      if (item.enabled) {
-      item.enabled = false;
+      obj.enabled = false;
      } else {
-      item.enabled = true;
+      obj.enabled = true;
      }
-     this.baseService.update(item).then(res => {
+     this.baseService.update(obj).then(res => {
        console.log("Updated Status", res);
        this.getItems();
      })

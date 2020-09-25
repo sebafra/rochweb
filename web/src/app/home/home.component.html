@@ -23,17 +23,25 @@
         <div class="col-md-12 search-form">
           <form class="form-inline">
             <div class="input-group mb-3" style=" margin-right: 1em;">
-              <select type="text" class="form-control" [(ngModel)]="categorySelected" [ngModelOptions]="{standalone: true}" aria-label="Buscá" aria-describedby="button-addon2">
+              <select type="text" class="form-control" (change)="changeCategory($event)" [(ngModel)]="categorySelected" [ngModelOptions]="{standalone: true}" aria-label="Buscá" aria-describedby="button-addon2">
                 <option value="all">Todas</option>
                 <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
               </select>
             </div>
+            <!-- <div class="input-group mb-3" style=" margin-right: 1em;">
+              <select type="text" class="form-control" [(ngModel)]="subcategorySelected" [ngModelOptions]="{standalone: true}" aria-label="Buscá" aria-describedby="button-addon2">
+                <option value="all">Todas</option>
+                <option *ngFor="let item of subcategories" [value]="item.id">{{item.name}}</option>
+              </select>
+            </div> -->
             <div class="input-group mb-3">
-              <input type="text" (keyup.enter)="search($event)" class="form-control" placeholder="¿Qué estás buscando?" aria-label="Buscá" aria-describedby="button-addon2">
+              <input type="text" (keyup.enter)="search($event)" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="¿Qué estás buscando?">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
               </div>
+                <button class="btn btn-outline-light ml-4" type="button" id="button-addon2" (click)="search($event)">Buscar</button>
             </div>
+
             <div class="results-container" *ngIf="searchResult.length > 0">
               <ul>
                 <li *ngFor="let item of searchResult" (click)="toCatalog(item)">{{item?.category?.name}} {{item?.subcategory?.name}}</li>

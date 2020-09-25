@@ -1,6 +1,6 @@
 export class Constants {
   // Global Settings
-  public static APP_NAME='Rochman Manager';
+  public static APP_NAME='Rochman Kambalache';
   public static APP_VERSION='0.0.1';
   //public static GOOGLE_ANALYTICS_TRACK_ID='UA-33759313-6';
   //public static GOOGLE_MAPS_KEY='12345678';

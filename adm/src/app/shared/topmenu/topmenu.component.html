@@ -1,6 +1,6 @@
 <div class="row bg-faded topbar">
   <div class="col-6">
-    <h4><a href="" class="nav-link text-primary">{{app_title}} <small> v{{app_version}}</small></a></h4>
+    <h4><a href="" class="nav-link text-danger">{{app_title}}</a></h4>
   </div>
   <div *ngIf="user" class="col-6" style="text-align:right">
     <a class="nav-link d-inline" (click)="showProfile()"><i class="fa fa-user"></i> {{user?.firstName}} {{user?.lastName}} </a> |

@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   categorySelected: any = "all";
   searchResult: any = [];
   filters: any = {};
+  searchText: string;
 
   constructor(
     // private noticiaService: NoticiaService,
@@ -53,17 +54,18 @@ export class HomeComponent implements OnInit {
   }
 
   loadArticles() {
-    this.articleService.getAllSorted(this.filters, 100, { timestamp: 1 }, [{"path": "subcategory", "populate": { "path": "category" }}]).then(
+    this.filters.enabled = true;
+    this.articleService.getAllSorted(this.filters, 100, { timestamp: 1 }, [{ "path": "subcategory", "populate": { "path": "category" } }]).then(
       result => {
         this.articles = result;
       }
     );
   }
   loadSubcategories() {
-    this.subcategoryService.getAllSorted({}, 100, {}, [{"path": "category"}]).then(
+    this.subcategoryService.getAllSorted({}, 100, {}, [{ "path": "category" }]).then(
       result => {
         this.subcategories = result;
-        console.log("Subcategories: ",this.subcategories)
+        console.log("Subcategories: ", this.subcategories)
       }
     );
   }
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit {
     this.categoryService.getAllSorted({}, 100, {}, []).then(
       result => {
         this.categories = result;
-        console.log("categories: ",this.categories)
+        console.log("categories: ", this.categories)
       }
     );
   }
@@ -94,26 +96,25 @@ export class HomeComponent implements OnInit {
 
   }
 
-  search(event){
-    const value = event.target.value.trim();
-    if (value === '') {
-      return;
-    } else {
-      let filters: any = {};
-      filters.name = value;
-      if(this.categorySelected != "all"){
-        filters.category = this.categorySelected;
-      }
-      console.log("Filters to send: ", filters);
-      this.router.navigate(['catalog/', filters]);
+  search(event) {
+    let filters: any = {};
+    if (this.searchText && this.searchText !== '') {
+      filters.name = this.searchText;
     }
+
+    if (this.categorySelected != "all") {
+      filters.category = this.categorySelected;
+    }
+    console.log("Filters to send: ", filters);
+    this.router.navigate(['catalog/', filters]);
+
   }
-  searchAlt(event){
+  searchAlt(event) {
     const value = event.target.value.trim();
     if (value === '') {
       this.filters.name = [];
       return;
-    } else { 
+    } else {
       this.filters.name = value;
     }
     this.loadArticles();
@@ -131,11 +132,11 @@ export class HomeComponent implements OnInit {
     this.articleService.search(value)
       .then(response => {
         const res: any = response;
-        console.log({response});
+        console.log({ response });
         this.searchResult = res.articles;
       })
       .catch(error => {
-        console.log({error});
+        console.log({ error });
         alert(error.message);
         this.searchResult = [];
       });

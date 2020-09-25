@@ -17,11 +17,13 @@ export class CatalogComponent implements OnInit {
   articles: any = [];
   articlesFiltered: any = [];
   objectKeys = Object.keys;
+  params: any;
 
   textSearch: string;
   years: any = [];
   categories: any = [];
   subcategories: any = [];
+  subcats: any = [];
   new: Boolean;
   img_url_base: any = environment.imagesUrl;
   loader: any = './assets/img/loader.gif';
@@ -49,6 +51,15 @@ export class CatalogComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       console.log('parametros', params);
+      this.params = params;
+      // if(this.params){
+      //   if(this.params.category){
+      //     this.categorySelected = this.params.category
+      //   }
+      //   if(this.params.text){
+      //     this.categorySelected = this.params.text
+      //   }
+      // }
 
       for (const prop in params) {
         if (params.hasOwnProperty(prop)) {
@@ -58,6 +69,7 @@ export class CatalogComponent implements OnInit {
     console.log('filters ', this.filters);
     this.loadArticles();
     this.getCategories();
+    this.getAllSubcats();
     });
   }
 
@@ -67,6 +79,7 @@ export class CatalogComponent implements OnInit {
   }
 
   loadArticles() {
+    this.filters.enabled = true;
     this.loader = true;
     if (this.textSearch) {
       this.filters.name = this.textSearch;
@@ -127,6 +140,18 @@ export class CatalogComponent implements OnInit {
   filterProperties () {
     return Object.keys(this.filters);
   }
+  getCategoryName(item){
+    let ret;
+    let categoryName = this.categories.filter(el => el.id == item);
+    ret = categoryName[0].name;
+    return ret
+  }
+  getSubCategoryName(item){
+    let ret;
+    let subcategoryName = this.subcats.filter(el => el.id == item);
+    ret = subcategoryName[0].name;
+    return ret
+  }
 
   getCategories (){
     this.categoryService.getAll({})
@@ -141,6 +166,13 @@ export class CatalogComponent implements OnInit {
       .then(res => {
         this.subcategories = res;
         console.log('subcategories: ', this.subcategories);
+      })
+  }
+  getAllSubcats(){
+    this.subcategoryService.getAll({})
+      .then(res => {
+        this.subcats = res;
+        console.log('subcats: ', this.subcats);
       })
   }
 
@@ -196,7 +228,7 @@ export class CatalogComponent implements OnInit {
     }
     getName(item){
       let ret: string;
-      console.log(item);
+      console.log("get name",item);
       switch (item.key) {
         case "category":
           let categoryName = this.categories.filter(el => el.id == item.value);

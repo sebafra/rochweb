@@ -2,8 +2,8 @@
   <div class="row no-gutters">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Artículos</a></li>
-        <li class="breadcrumb-item"><a href="#">{{article?.subcategory?.category?.name}}</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/catalog']" routerLinkActive="router-link-active" >Artículos</a></li>
+        <li class="breadcrumb-item"><a (click)="goToCategory(article?.subcategory?.category?.id)" >{{article?.subcategory?.category?.name}}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{article?.subcategory?.name}}</li>
       </ol>
     </nav>
@@ -79,7 +79,10 @@
           <div class="col-sm-6">
             <dl>
               <dt><i class="fa fa-phone text-danger"></i> Celular</dt>
-              <dd>{{article?.user?.celular}}</dd>
+              <dd *ngIf="!showCell" (click)="showCell = true"><button class="btn btn-link btn-sm" style="color: red" type="button">Ver número</button></dd>
+              <dd *ngIf="showCell">
+                <a [href]="'tel:' + article?.user?.celular">{{article?.user?.celular}}</a>
+              </dd>
             </dl>
           </div>
           <div id="map"></div>
@@ -162,25 +165,26 @@
     </h2>
     <div class="featured-cars">
       <div class="row card-list">
-        <div *ngFor="let item of cars" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
-          <div class="card mb-2 car-card">
-            <img class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]"
-              [offset]="offset">
-            <button *ngIf="item.opportunity" type="button"
-              class="btn btn-danger btn-sm opportunity-label">OPORTUNIDAD</button>
-            <button *ngIf="item.newest" type="button" class="btn btn-warning btn-sm new-label">NOVEDAD</button>
-            <button *ngIf="item.year" class="btn btn-light btn-sm year-label">{{item.year}}</button>
-            <div class="card-block p-3">
-              <h4 class="card-title">{{ item.brand.name }} {{ item.model.name }}</h4>
-              <div class="card-text" [innerHtml]="item.description | truncate:80"></div>
-            </div>
-            <div class="card-footer">
-              <div class="row">
-                <div class="col credit-container"><span class="credit">36 cuotas de $12000</span></div>
-                <div class="col price-container"><span class="price">{{item.price}}</span></div>
+        <div *ngFor="let item of related" class="col-sm-6 col-md-4 col-lg-4" (click)="showVehicle(item)">
+        <div class="card mb-2 car-card">
+          <img class="card-img-top" [defaultImage]="loader" [lazyLoad]="img_url_base + '/' + item.images[0]" [offset]="offset">
+          <div class="card-block p-3">
+            <h4 class="card-title">{{ item?.name }}</h4>
+            <div class="card-text">{{ item?.subcategory?.category?.name }} {{ item?.subcategory?.name }}</div>
+            <div class="card-text" [innerHtml]="item.description | truncate:80"></div>
+          </div>
+          <div class="card-footer">
+            <div class="row no-gutters">
+              <div *ngIf="item.advance > 0" class="credit">
+                Anticipo de {{item.advance}}
               </div>
+              <div *ngIf="item.quot && item.quot_price" class="credit">
+                <span *ngIf="item.advance > 0">y</span> {{car?.quot}} cuotas de {{car?.quot_price}}
+              </div>
+              <div class="col price-container"><span class="price">{{item.price}}</span></div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

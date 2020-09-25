@@ -23,12 +23,20 @@
       </div>
     </div>
   </div>
-  <div *ngIf="objectKeys(filters).length > 0" class="texto-central-secundario">
+  <div class="texto-central-secundario" *ngIf="objectKeys(filters).length > 1" >
+    <div class="container">
+      <button (click)="deleteFilters()"  type="button" class="btn btn-outline">x Limpiar filtros</button>
+      <button *ngIf="filters.category" type="button" class="btn btn-sm btn-outline-dark">{{getCategoryName(filters.category)}}</button>
+      <button *ngIf="filters.subcategory" type="button" class="btn btn-sm btn-outline-dark"> {{getSubCategoryName(filters.subcategory)}}</button>
+      <button *ngIf="filters.name" type="button" class="btn btn-sm btn-outline-dark">Búsqueda: {{filters.name}}</button>
+  </div>
+  </div>
+  <!-- <div *ngIf="objectKeys(filters).length > 0" class="texto-central-secundario">
     <div class="container">
       <button *ngIf="objectKeys(filters).length > 0" (click)="deleteFilters()"  type="button" class="btn btn-outline">x Limpiar filtros</button>
       <button *ngFor="let item of filters | keyvalue" type="button" class="btn btn-sm btn-outline-dark">{{getName(item)}}</button>
   </div>
-  </div>
+  </div> -->
 </div>
 <div *ngIf="!loader" class="container pt-2">
   <div class="featured-cars">
@@ -52,7 +60,6 @@
               <div *ngIf="item.quot && item.quot_price" class="credit">
                 <span *ngIf="item.advance > 0">y</span> {{car?.quot}} cuotas de {{car?.quot_price}}
               </div>
-              <!-- <div class="col credit-container"><span class="credit">36 cuotas de $12000</span></div> -->
               <div class="col price-container"><span class="price">{{item.price}}</span></div>
             </div>
           </div>

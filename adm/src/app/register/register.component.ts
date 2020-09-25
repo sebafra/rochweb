@@ -46,8 +46,8 @@ export class RegisterComponent extends BaseComponent {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, Validators.required],
-      user: [null, Validators.required],
-      password: [null, Validators.required],
+      user: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      password: [null, Validators.compose([Validators.required,Validators.minLength(4)])],
       celular: [null, Validators.required],
       location: [null]
 
@@ -94,7 +94,10 @@ export class RegisterComponent extends BaseComponent {
   }
 
   onSubmit(values) {
-    values.location.coordinates = [this.lng, this.lat];
+    console.log('Values pre save', values);
+    values.location = {
+      coordinates: [this.lng, this.lat]
+    };
     console.log('Values to save', values);
     super.logForm(values)
   }
