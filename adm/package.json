@@ -24,7 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.2",
     "angular-font-awesome": "^2.0.3",
     "core-js": "^2.6.11",
-    "enhanced-resolve": "^3.4.1",
+    "enhanced-resolve": "^3.3.0",
     "font-awesome": "^4.7.0",
     "ng-lazyload-image": "^3.4.2",
     "ng2-file-upload": "^1.4.0",
