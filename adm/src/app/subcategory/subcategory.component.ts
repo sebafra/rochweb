@@ -23,7 +23,7 @@ export class SubcategoryComponent extends BaseComponent {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef,
     public subcategoryService: SubcategoryService,
-    public brandService: CategoryService
+    public categoryService: CategoryService
   ) {
     super(router, formBuilder, route, toastr, vcr, <BaseService>subcategoryService)
 
@@ -31,7 +31,7 @@ export class SubcategoryComponent extends BaseComponent {
 
   ngOnInit() {
     super.ngOnInit()
-    this.brandService.getAll({})
+    this.categoryService.getAll({})
       .then(res => {
         this.categories = res
       })
@@ -43,18 +43,20 @@ export class SubcategoryComponent extends BaseComponent {
 
   getFormNew() {
     return this.formBuilder.group({
-      id: [null],
       name: [null, Validators.required],
-      brand: [null, Validators.required]
+      category: [null, Validators.required]
     })
   }
 
   getFormEdit(item) {
     return this.formBuilder.group({
-      id: [item._id],
+      id: [item.id],
       name: [item.name, Validators.required],
-      brand: [item.brand, Validators.required]
+      category: [item.category, Validators.required]
     })
   }
+  // logForm(values){
+  //   console.log(values);
+  // }
 
 }

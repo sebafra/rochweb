@@ -75,6 +75,8 @@ app.use('/api', routes)
 app.use('/', express.static(path.join(__dirname, '../web/dist/')))
 app.use('/web', express.static(path.join(__dirname, '../web/dist/')))
 app.use('/adm', express.static(path.join(__dirname, '../adm/dist/')))
+app.use('/web/*', express.static(path.join(__dirname, '../web/dist/')))
+app.use('/adm/*', express.static(path.join(__dirname, '../adm/dist/')))
 app.use('/files', express.static(path.join(__dirname, '../adm/files/')))
 
 

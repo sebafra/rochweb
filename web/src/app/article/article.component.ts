@@ -49,7 +49,7 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
       this.loadArticles(this.article_id);
       //TODO
-      const url = `http://www.rochmankambalache.com/article/${this.article_id}`;
+    const url = `${environment.domain}/article/${this.article_id}`;
       this.href = encodeURI(url);
 
       this.formObject = this.formBuilder.group({

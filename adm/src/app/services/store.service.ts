@@ -78,6 +78,7 @@ export class StoreService implements CanActivate {
     localStorage.removeItem(Constants.STORAGE.user);
     localStorage.removeItem('token');
     this.changeLogin(false);
+    this.changeAdmin(false);
     this.setUserData(undefined);
     this.router.navigateByUrl('/login')
   }
