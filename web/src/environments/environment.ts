@@ -8,5 +8,6 @@ export const environment = {
   // serverUrl: 'http://sd-1060583-h00007.ferozo.net:3100/api',
   // imagesUrl: 'http://sd-1060583-h00007.ferozo.net:3100/files'
   serverUrl: 'http://localhost:3100/api',
-  imagesUrl: 'http://localhost:3100/files'
+  imagesUrl: 'http://localhost:3100/files',
+  domain: 'http://localhost:3100'
 };

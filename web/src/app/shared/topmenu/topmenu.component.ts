@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ArticleService } from '../../services/article.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Constants } from '../../app.constants';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-topmenu',
@@ -72,8 +73,9 @@ export class TopmenuComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
   showAdmin(){
-    window.open("http://vps-1060583-x.dattaweb.com:3100/adm");
+    //window.open("http://vps-1060583-x.dattaweb.com:3100/adm");
     //window.open("http://localhost:3100/adm");
+    window.open(environment.domain + "/adm");
   }
 
 
