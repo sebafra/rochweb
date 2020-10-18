@@ -79,7 +79,7 @@ app.use('/files', express.static(path.join(__dirname, '../adm/files/')))
 
 
 app.get('/*',  function(req, res) {
-	res.sendFile('index.html', { root: '../adm/dist/' })
+	res.sendFile('index.html', { root: '../web/dist/' })
 })
 
 export {app, server}
