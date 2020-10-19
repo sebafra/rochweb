@@ -77,8 +77,10 @@ export class ArticleComponent implements OnInit {
   getRelated(category){
     this.articleService.getAllSorted({ category,_id:{$ne:this.article.id} }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" } }, 'user'])
       .then(res => {
-        for (let index = 0; index < 3; index++) {
-          this.related.push(res[index]);
+        if (res.length > 0) {
+          for (let index = 0; index < 3; index++) {
+            this.related.push(res[index]);
+          }
         }
       })
       .catch(err => console.log(err));

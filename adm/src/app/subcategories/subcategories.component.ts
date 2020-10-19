@@ -15,7 +15,9 @@ import { BasesComponent } from '../bases/bases.component';
 })
 export class SubcategoriesComponent extends BasesComponent {
 
-  subcategories=[];
+  subcategories: any = [];
+  categories: any = [];
+  categorySelected: any;
 
   constructor(
     public router: Router,
@@ -35,40 +37,29 @@ export class SubcategoriesComponent extends BasesComponent {
     return ['category']
   }
 
-  getItemSuccess() {
-    if (this.subcategories.length <= 0) {
-      this.getCategories();
-
-    }
+  getSort() {
+    return {'name': 1}
+  }
+  
+  ngOnInit() {
+    this.loadCategories();
+    super.ngOnInit();
   }
 
-  getCategories() {
-
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.subcategories.filter(el => {
-        return (el._id === this.items[i].category._id);
-      }).length <= 0) {
-        this.subcategories.push(this.items[i].category);
-      }
-    }
-    console.log('subcategories: ', this.subcategories);
+  loadCategories() {
+    this.categoryService.getAll({}).then(items => {
+      this.categories = items;
+      console.log("Categorías: ",this.categories);
+    });
   }
-
-  // loadBrands() {
-  //   this.categoryService.getAll({}).then(items => {
-  //     this.subcategories = items;
-  //   });
-  // }
-
-  changeCategory(category) {
-    console.log(category.target.value);
-    if (category.target.value === -1) {
+  changeCategory(){
+    if (this.categorySelected == "0") {
       this.filters = {};
-      this.getItems()
     } else {
-      this.filters = { category: category.target.value };
-      this.getItems()
+      this.filters = { category: this.categorySelected };
     }
+    console.log("Category Selected: ",this.filters);
+    this.getItems();
   }
 
 }

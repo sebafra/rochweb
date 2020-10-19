@@ -91,9 +91,13 @@ export class BasesComponent implements OnInit {
     return [];
   }
 
+  getSort() {
+    return {};
+  }
+
   getItems() {
     this.loading = true
-    this.baseService.getAllAndPopulate(this.getFilters(), this.getPopulates()).then(items => {
+    this.baseService.getAllSorted(this.getFilters(),this.getSort(), this.getPopulates()).then(items => {
       this.items = items;
       this.getItemSuccess();
       this.loading = false
