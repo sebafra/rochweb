@@ -11,6 +11,9 @@
     <div class="form-group">
       <label for="name">Nombre</label>
       <input type="text" class="form-control" formControlName="name" placeholder="">
+      <div *ngIf="!formObject.controls['name'].valid && formObject.controls['name'].touched" class="invalid-feedback">
+        Debes ingresar un nombre
+      </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -19,6 +22,9 @@
           <option value="" disabled selected>Seleccione una Categoría</option>
           <option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</option>
         </select>
+        <div *ngIf="!formObject.controls['category'].valid && formObject.controls['category'].touched" class="invalid-feedback">
+          Debes seleccionar una categoría
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="subcategory">Subcategoría</label>
@@ -26,6 +32,9 @@
           <option value="" disabled selected>Seleccione una Subcategoría</option>
           <option value="{{subcategory.id}}" *ngFor="let subcategory of subcategories">{{subcategory.name}}</option>
         </select>
+        <div *ngIf="!formObject.controls['subcategory'].valid && formObject.controls['subcategory'].touched" class="invalid-feedback">
+          Debes seleccionar una subcategoría
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -35,6 +44,9 @@
           <option value="0">Nuevo</option>
           <option value="1">Usado</option>
         </select>
+        <div *ngIf="!formObject.controls['condition'].valid && formObject.controls['condition'].touched" class="invalid-feedback">
+          Debes seleccionar un estado
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="price">Precio</label>

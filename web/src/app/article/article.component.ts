@@ -60,8 +60,8 @@ export class ArticleComponent implements OnInit {
       });
   console.log( this.formObject);
   }
-  loadArticles(_id) {
-    this.articleService.getAllSorted({ _id }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" }},'user'])
+  loadArticles(id) {
+    this.articleService.getAllSorted({ id }, 1, {}, [{ "path": "subcategory", "populate": { "path": "category" }},'user'])
       .then(res => {
         this.article = res[0];
         console.log(this.article);

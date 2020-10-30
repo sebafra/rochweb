@@ -57,13 +57,13 @@ export class ArticleComponent extends BaseComponent {
 
   getFormNew() {
     return this.formBuilder.group({
-      name: [null],
-      subcategory: [null],
-      category: [null],
+      name: [null, Validators.required],
+      subcategory: [null, Validators.required],
+      category: [null, Validators.required],
       description: [null],
       images: [null],
       price: [null],
-      condition: [null]
+      condition: [null, Validators.required]
     })
   }
 
